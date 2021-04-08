@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Input, Button } from 'antd';
 
