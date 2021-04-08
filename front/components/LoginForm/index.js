@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { Input, Button } from 'antd';
+import propTypes from 'prop-types';
 import Link from 'next/link';
+import { Input, Button } from 'antd';
+
 import * as S from './styles';
 
 const LoginForm = ({ setIsLoggedIn }) => {
@@ -9,28 +11,26 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
   const onChangeId = useCallback((e) => {
     setId(e.target.value);
-  })
+  });
 
   const onChangePassword = useCallback((e) => {
     setPassword(e.target.value);
-  })
+  });
 
-  const onSubmitForm = useCallback((e) => {
-    console.log(id, password, setPassword);
-    setIsLoggedIn(true);
-  }, [id, password])
+  const onSubmitForm = useCallback(
+    (e) => {
+      console.log(id, password, setPassword);
+      setIsLoggedIn(true);
+    },
+    [id, password]
+  );
 
   return (
     <S.LoginForm onFinish={onSubmitForm}>
       <div>
         <label htmlFor="user-id">아이디</label>
         <br />
-        <Input
-          name="user-id"
-          value={id}
-          onChange={onChangeId}
-          required
-        />
+        <Input name="user-id" value={id} onChange={onChangeId} required />
       </div>
       <div>
         <label htmlFor="user-password">비밀번호</label>
@@ -44,11 +44,21 @@ const LoginForm = ({ setIsLoggedIn }) => {
         />
       </div>
       <S.ButtonWrapper>
-          <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
-          <Link href="/signup"><a><Button>회원가입</Button></a></Link>
+        <Button type="primary" htmlType="submit" loading={false}>
+          로그인
+        </Button>
+        <Link href="/signup">
+          <a>
+            <Button>회원가입</Button>
+          </a>
+        </Link>
       </S.ButtonWrapper>
     </S.LoginForm>
   );
+};
+
+LoginForm.propTypes = {
+  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 export default LoginForm;
