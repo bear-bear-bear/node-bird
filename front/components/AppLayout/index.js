@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Menu, Input, Row, Col } from 'antd';
+import { Menu, Row, Col } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 
 import UserProfile from '../UserProfile';
 import LoginForm from '../LoginForm';
+
+import * as S from './styles';
 
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,7 +25,7 @@ const AppLayout = ({ children }) => {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Input.Search enterButton style={{ verticalAlign: 'middle' }} />
+          <S.SearchInput enterButton />
         </Menu.Item>
         <Menu.Item>
           <Link href="/signup">

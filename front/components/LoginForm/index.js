@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Input, Button } from 'antd';
 import Link from 'next/link';
+import * as S from './styles';
 
 const LoginForm = () => {
   const [id, setId] = useState('');
@@ -37,10 +38,10 @@ const LoginForm = () => {
           required
         />
       </div>
-      <div style={{ marginTop: 10 }}>
+      <S.ButtonWrapper>
           <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
           <Link href="/signup"><a><Button>회원가입</Button></a></Link>
-      </div>
+      </S.ButtonWrapper>
     </Form>
   );
 };
