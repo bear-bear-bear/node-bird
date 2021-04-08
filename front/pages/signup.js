@@ -1,16 +1,16 @@
 import Head from 'next/head';
+
 import AppLayout from '../components/AppLayout';
+import SignupForm from '../components/SignupForm';
 
 const Signup = () => {
   return (
-    <>
+    <AppLayout>
       <Head>
         <title>회원가입 | NodeBird</title>
       </Head>
-      <AppLayout>
-        <div>회원가입 페이지</div>
-      </AppLayout>
-    </>
+      <SignupForm />
+    </AppLayout>
   );
 };
 
