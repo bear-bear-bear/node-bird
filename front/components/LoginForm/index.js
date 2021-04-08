@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd';
 import Link from 'next/link';
 import * as S from './styles';
 
-const LoginForm = () => {
+const LoginForm = ({ setIsLoggedIn }) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,8 +15,13 @@ const LoginForm = () => {
     setPassword(e.target.value);
   })
 
+  const onSubmitForm = useCallback((e) => {
+    console.log(id, password, setPassword);
+    setIsLoggedIn(true);
+  }, [id, password])
+
   return (
-    <Form>
+    <Form onFinish={onSubmitForm}>
       <div>
         <label htmlFor="user-id">아이디</label>
         <br />
