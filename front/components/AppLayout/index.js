@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { Menu, Input, Row, Col } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 
-import UserProfile from './UserProfile';
-import LoginForm from './LoginForm';
+import UserProfile from '../UserProfile';
+import LoginForm from '../LoginForm';
 
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
