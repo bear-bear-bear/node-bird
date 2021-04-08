@@ -35,7 +35,11 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggedIn ? <UserProfile /> : <LoginForm setIsLoggedIn={ setIsLoggedIn }/>}
+          {
+            isLoggedIn 
+              ? <UserProfile setIsLoggedIn={setIsLoggedIn}/>
+              : <LoginForm setIsLoggedIn={setIsLoggedIn}/>
+          }
         </Col>
         <Col xs={24} md={12}>
           {children}
@@ -43,9 +47,7 @@ const AppLayout = ({ children }) => {
         <Col xs={24} md={6}>
           <a href="https://github.com/bear-bear-bear" target="_blank" rel="noopener noreferrer">
             Made by
-            <span>
-              <GithubOutlined />
-            </span>
+            <span><GithubOutlined /></span>
             bear-bear-bear
           </a>
         </Col>
