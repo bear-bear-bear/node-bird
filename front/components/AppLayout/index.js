@@ -11,7 +11,7 @@ import LoginForm from '../LoginForm';
 import * as S from './styles';
 
 const AppLayout = ({ children }) => {
-  const isLoggedIn = useSelector(({ user }) => user.isLoggedIn);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   return (
     <div>

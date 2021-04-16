@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Input, Button } from 'antd';
 
 import useInput from '../../hooks/useInput';
-import { loginAction } from '../../reducers';
+import { loginAction } from '../../reducers/user';
 
 import * as S from './styles';
 
