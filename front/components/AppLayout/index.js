@@ -15,6 +15,7 @@ const AppLayout = ({ children }) => {
 
   return (
     <div>
+      <S.Global />
       <Menu mode="horizontal">
         <Menu.Item>
           <Link href="/">
