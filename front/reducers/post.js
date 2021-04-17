@@ -4,7 +4,7 @@ const initialState = {
       id: 1,
       User: {
         id: 1,
-        nickname: '제로초',
+        nickname: 'bear',
       },
       content: '첫 번째 게시글 #해시태그 #익스프레스',
       Images: [

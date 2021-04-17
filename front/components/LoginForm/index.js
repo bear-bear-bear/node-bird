@@ -16,7 +16,7 @@ const LoginForm = () => {
   const onSubmitForm = useCallback(
     (e) => {
       console.log(id, password);
-      dispatch(loginAction(id, password));
+      dispatch(loginAction({ id, password }));
     },
     [id, password]
   );
