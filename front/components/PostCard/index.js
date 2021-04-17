@@ -13,6 +13,8 @@ import {
 import PostImages from '../PostImages';
 import CommentForm from '../CommentForm';
 
+import * as S from './styles';
+
 const PostCard = ({ post }) => {
   const [liked, setLiked] = useState(false);
   const [commentFormOpened, setCommentFormOpened] = useState(false);
@@ -26,7 +28,7 @@ const PostCard = ({ post }) => {
   }, []);
 
   return (
-    <div>
+    <S.CardWrapper>
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
@@ -80,7 +82,7 @@ const PostCard = ({ post }) => {
           />
         </div>
       )}
-    </div>
+    </S.CardWrapper>
   );
 };
 
