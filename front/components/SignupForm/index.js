@@ -1,12 +1,18 @@
-import { React, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Checkbox } from 'antd';
+
 
 import useInput from '../../hooks/useInput';
-import { Checkbox } from 'antd';
+import { SIGN_UP_REQUEST } from '../../reducers/user';
 
 import * as S from './styles';
 
 const SignupForm = () => {
-  const [id, onChangeId] = useInput('');
+  const dispatch = useDispatch();
+  const { signUpLoading } = useSelector((state) => state.user);
+
+  const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
 
@@ -34,19 +40,24 @@ const SignupForm = () => {
     if (!term) {
       return setTermError(true);
     }
-    console.log(id, nickname, password);
+    console.log(email, nickname, password);
+    dispatch({
+      type: SIGN_UP_REQUEST,
+      data: { email, nickname, password },
+    })
   }, [password, passwordCheck, term]);
 
   return (
     <S.SignupForm onFinish={onSubmit}>
       <div>
-        <label htmlFor="user-id">아이디</label>
+        <label htmlFor="user-email">이메일</label>
         <br />
         <S.SignupInput
-          name="user-id"
-          value={id}
+          name="user-email"
+          type="email"
+          value={email}
           required
-          onChange={onChangeId}
+          onChange={onChangeEmail}
         />
       </div>
       <div>
@@ -93,7 +104,7 @@ const SignupForm = () => {
         )}
       </div>
       <S.SubmitWrapper>
-        <S.SubmitButton type="primary" htmlType="submit">
+        <S.SubmitButton type="primary" htmlType="submit" loading={signUpLoading}>
           가입하기
         </S.SubmitButton>
       </S.SubmitWrapper>

@@ -1,20 +1,14 @@
 import Head from 'next/head';
+import router from 'next/router';
+import { useSelector } from 'react-redux';
 
 import AppLayout from '../components/AppLayout';
 import NicknameEditForm from '../components/NicknameEditForm';
 import FollowList from '../components/FollowList';
 
 const Profile = () => {
-  const followingList = [
-    { nickname: '사람4' },
-    { nickname: '사람5' },
-    { nickname: '사람6' },
-  ];
-  const followerList = [
-    { nickname: '사람1' },
-    { nickname: '사람2' },
-    { nickname: '사람3' },
-  ];
+  const { me } = useSelector((state) => state.user);
+  if (me === null) router.push('/');
 
   return (
     <>
@@ -23,11 +17,11 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NicknameEditForm />
-        <FollowList header="팔로잉 목록" data={followingList} />
-        <FollowList header="팔로워 목록" data={followerList} />
+        <FollowList header="팔로잉 목록" data={me?.Followings} />
+        <FollowList header="팔로워 목록" data={me?.Followers} />
       </AppLayout>
     </>
-  );
+  );g
 };
 
 export default Profile;
