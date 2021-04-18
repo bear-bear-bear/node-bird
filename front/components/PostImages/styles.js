@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const OneImageWrapper = styled.div`
     display: flex;
     justify-content: center;
+    cursor: pointer;
 `;
 
 export const MoreWrapper = styled.div`
@@ -10,6 +11,7 @@ export const MoreWrapper = styled.div`
     width: 50%;
     text-align: center;
     vertical-align: middle;
+    cursor: pointer;
 `;
 
 const imageWidth = {
@@ -22,4 +24,5 @@ export const Image = styled.img`
     max-height: ${({ size }) => size === 'auto' ? '60vh' : 'initial'};
     width: ${({ size }) => imageWidth[size] || '100%'};
     max-width: 100%;
+    cursor: pointer;
 `
