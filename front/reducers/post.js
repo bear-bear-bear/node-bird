@@ -1,3 +1,5 @@
+import shortId from 'shortid';
+
 const initialState = {
   mainPosts: [
     {
@@ -56,7 +58,7 @@ export const addComment = (data) => ({
 });
 
 const dummyPost = (data) => ({
-  id: 2,
+  id: shortId.generate(),
   content: data,
   User: {
     id: 1,
