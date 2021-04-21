@@ -32,6 +32,9 @@ const initialState = {
   addPostDone: false,
   addPostLoading: false,
   addPostError: null,
+  addCommentDone: false,
+  addCommentLoading: false,
+  addCommentError: null,
 };
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
