@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Card, Button, Popover, Avatar, List, Comment } from 'antd';
@@ -34,14 +34,13 @@ const PostCard = ({ post }) => {
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
           <RetweetOutlined key="retweet" />,
-          liked 
+          liked
             ? <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onToggleLike} />
-            : <HeartOutlined key="heart" onClick={onToggleLike} />
-          ,
+            : <HeartOutlined key="heart" onClick={onToggleLike} />,
           <MessageOutlined key="comment" onClick={onToggleComment} />,
           <Popover
             key="more"
-            content={
+            content={(
               <Button.Group>
                 {id && id === post.User.id ? (
                   <>
@@ -52,7 +51,7 @@ const PostCard = ({ post }) => {
                   <Button>신고</Button>
                 )}
               </Button.Group>
-            }
+            )}
           >
             <EllipsisOutlined />
           </Popover>,
@@ -73,7 +72,7 @@ const PostCard = ({ post }) => {
             dataSource={post.Comments}
             renderItem={(item) => (
               <li>
-                <Comment 
+                <Comment
                   author={item.User.nickname}
                   avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
                   content={item.content}

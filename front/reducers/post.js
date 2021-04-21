@@ -71,7 +71,7 @@ const reducer = (state = initialState, action) => {
         addPostLoading: true,
         addPostDone: false,
         addPostError: null,
-      }
+      };
     case ADD_POST_SUCCESS:
       return {
         ...state,
@@ -91,7 +91,7 @@ const reducer = (state = initialState, action) => {
         addCommentLoading: true,
         addCommentDone: false,
         addCommentError: null,
-      }
+      };
     case ADD_COMMENT_SUCCESS:
       return {
         ...state,

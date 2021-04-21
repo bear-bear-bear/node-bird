@@ -6,7 +6,7 @@ import { logoutRequestAction } from '../../reducers/user';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const { me , logOutLoading } = useSelector((state) => state.user);
+  const { me, logOutLoading } = useSelector((state) => state.user);
 
   const onLogOut = useCallback(() => {
     dispatch(logoutRequestAction());
@@ -20,7 +20,7 @@ const UserProfile = () => {
         <div key="follower">팔로워<br />{me.Followers?.length || 0}</div>,
       ]}
     >
-      <Card.Meta 
+      <Card.Meta
         avatar={<Avatar>{me.nickname}</Avatar>}
         title={me.nickname}
       />

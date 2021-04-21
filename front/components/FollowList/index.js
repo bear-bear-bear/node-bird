@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'antd';
 import { StopOutlined } from '@ant-design/icons';
@@ -19,13 +20,17 @@ const FollowList = ({ header, data }) => {
     </S.LoadMore>
   );
 
-  const Item = (item) => (
+  const Item = ({ nickname }) => (
     <S.FollowItem>
       <Card actions={[<StopOutlined key="stop" />]}>
-        <Card.Meta description={item.nickname} />
+        <Card.Meta description={nickname} />
       </Card>
     </S.FollowItem>
   );
+
+  Item.propTypes = {
+    nickname: PropTypes.string.isRequired,
+  };
 
   return (
     <S.FollowList

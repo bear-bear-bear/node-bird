@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -8,12 +8,14 @@ import * as S from './styles';
 
 const PostImages = ({ images }) => {
   const [showImagesZoom, setShowImagesZoom] = useState(false);
+
   const onZoom = useCallback(() => {
     setShowImagesZoom(true);
-  }, [])
+  }, []);
+
   const onClose = useCallback(() => {
     setShowImagesZoom(false);
-  }, [])
+  }, []);
 
   if (images.length === 1) {
     return (
@@ -21,7 +23,7 @@ const PostImages = ({ images }) => {
         <S.Image role="presentation" size="auto" src={images[0].src} alt={images[0].src} onClick={onZoom} />
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </S.OneImageWrapper>
-    )
+    );
   }
   if (images.length === 2) {
     return (
@@ -30,7 +32,7 @@ const PostImages = ({ images }) => {
         <S.Image role="presentation" size="halfSize" src={images[1].src} alt={images[1].src} onClick={onZoom} />
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>
-    )
+    );
   }
   if (images.length >= 3) {
     return (
@@ -45,13 +47,13 @@ const PostImages = ({ images }) => {
         </div>
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>
-    )
+    );
   }
   return null;
 };
 
 PostImages.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.object),
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default PostImages;

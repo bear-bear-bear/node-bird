@@ -14,8 +14,8 @@ export const Global = createGlobalStyle`
   .ant-col:last-child {
       padding-right: 0 !important;
   }
-`
+`;
 
 export const SearchInput = styled(Input.Search)`
     vertical-align: middle;
-`
+`;

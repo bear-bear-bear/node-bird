@@ -11,7 +11,7 @@ export const Global = createGlobalStyle`
   .ant-card-cover {
     transform: none !important; 
   }
-`
+`;
 
 export const Overlay = styled.div`
   position: fixed;
@@ -35,7 +35,7 @@ export const Header = styled.header`
     color: #333;
     line-height: 3rem;
   }
-`
+`;
 
 export const CloseBtn = styled(CloseOutlined)`
   position: absolute;
@@ -44,12 +44,12 @@ export const CloseBtn = styled(CloseOutlined)`
   padding: 1rem;
   line-height: 0.9;
   cursor: pointer;
-`
+`;
 
 export const SlickWrapper = styled.div`
   height: calc(100% - 3rem);
   background: #090909;
-`
+`;
 
 export const ImageWrapper = styled.div`
   padding: 2rem;
@@ -59,7 +59,7 @@ export const ImageWrapper = styled.div`
     margin: 0 auto;
     max-height: 750px;
   }
-`
+`;
 
 export const Indicator = styled.div`
   text-align: center;
@@ -75,4 +75,4 @@ export const Indicator = styled.div`
     color: white;
     font-size: 1rem;
   }
-`
+`;

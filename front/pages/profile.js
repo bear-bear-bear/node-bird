@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import router from 'next/router';
 import { useSelector } from 'react-redux';
@@ -21,7 +22,7 @@ const Profile = () => {
         <FollowList header="팔로워 목록" data={me?.Followers} />
       </AppLayout>
     </>
-  );g
+  );
 };
 
 export default Profile;

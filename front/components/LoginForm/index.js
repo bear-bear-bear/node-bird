@@ -14,21 +14,18 @@ const LoginForm = () => {
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
 
-  const onSubmitForm = useCallback(
-    (e) => {
-      console.log(email, password);
-      dispatch(loginRequestAction({ email, password }));
-    },
-    [email, password]
-  );
+  const onSubmitForm = useCallback(() => {
+    console.log(email, password);
+    dispatch(loginRequestAction({ email, password }));
+  }, [email, password]);
 
   return (
     <S.LoginForm onFinish={onSubmitForm}>
       <div>
         <label htmlFor="user-email">이메일</label>
         <br />
-        <Input 
-          name="user-email" 
+        <Input
+          name="user-email"
           type="email"
           value={email}
           onChange={onChangeEmail}
@@ -51,7 +48,7 @@ const LoginForm = () => {
           로그인
         </Button>
         <Link href="/signup">
-          <a><Button>회원가입</Button></a>
+          <a href="signup"><Button>회원가입</Button></a>
         </Link>
       </S.ButtonWrapper>
     </S.LoginForm>
