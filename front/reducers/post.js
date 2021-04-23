@@ -10,19 +10,32 @@ const initialState = {
       },
       content: '첫 번째 게시글 #해시태그 #익스프레스',
       Images: [
-        { src: 'https://picsum.photos/400/600' },
-        { src: 'https://picsum.photos/400/600' },
-        { src: 'https://picsum.photos/400/600' },
+        {
+          id: shortId.generate(),
+          src: 'https://picsum.photos/400/600',
+        },
+        {
+          id: shortId.generate(),
+          src: 'https://picsum.photos/400/600',
+        },
+        {
+          id: shortId.generate(),
+          src: 'https://picsum.photos/400/600',
+        },
       ],
       Comments: [
         {
+          id: shortId.generate(),
           User: {
+            id: shortId.generate(),
             nickname: 'people1',
           },
           content: '안녕하세요~',
         },
         {
+          id: shortId.generate(),
           User: {
+            id: shortId.generate(),
             nickname: 'people2',
           },
           content: '행복한 하루 되세요~',
