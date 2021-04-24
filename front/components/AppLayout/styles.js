@@ -17,5 +17,10 @@ export const Global = createGlobalStyle`
 `;
 
 export const SearchInput = styled(Input.Search)`
-    vertical-align: middle;
+  vertical-align: middle;
+`;
+
+export const IconWrapper = styled.span`
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
 `;

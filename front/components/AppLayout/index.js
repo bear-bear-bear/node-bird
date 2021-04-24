@@ -53,9 +53,9 @@ const AppLayout = ({ children }) => {
             rel="noopener noreferrer"
           >
             Made by
-            <span>
+            <S.IconWrapper>
               <GithubOutlined />
-            </span>
+            </S.IconWrapper>
             bear-bear-bear
           </a>
         </Col>
