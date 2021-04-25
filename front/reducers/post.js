@@ -47,18 +47,32 @@ const initialState = {
   addPostDone: false,
   addPostLoading: false,
   addPostError: null,
+  removePostDone: false,
+  removePostLoading: false,
+  removePostError: null,
   addCommentDone: false,
   addCommentLoading: false,
   addCommentError: null,
+  // removeCommentDone: false,
+  // removeCommentLoading: false,
+  // removeCommentError: null,
 };
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 
+export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
+export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
+export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
+
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
+
+// export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
+// export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
+// export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
 
 export const addPost = (data) => ({
   type: ADD_POST_REQUEST,
@@ -71,8 +85,8 @@ export const addComment = (data) => ({
 });
 
 const dummyPost = (data) => ({
-  id: shortId.generate(),
-  content: data,
+  id: data.id,
+  content: data.content,
   User: {
     id: 1,
     nickname: 'dummyPostNickname',
@@ -110,6 +124,26 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         addPostLoading: false,
+        error: action.error,
+      };
+    case REMOVE_POST_REQUEST:
+      return {
+        ...state,
+        removePostLoading: true,
+        removePostDone: false,
+        removePostError: null,
+      };
+    case REMOVE_POST_SUCCESS:
+      return {
+        ...state,
+        removePostLoading: false,
+        removePostDone: true,
+        mainPosts: state.mainPosts.filter((v) => v.id !== action.data),
+      };
+    case REMOVE_POST_FAILURE:
+      return {
+        ...state,
+        removePostLoading: false,
         error: action.error,
       };
     case ADD_COMMENT_REQUEST:
