@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
-import router from 'next/router';
+import Router from 'next/router';
 import { useSelector } from 'react-redux';
 
 import AppLayout from '../components/AppLayout';
@@ -9,7 +9,10 @@ import FollowList from '../components/FollowList';
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
-  if (me === null) router.push('/');
+
+  useEffect(() => {
+    if (me === null) Router.push('/');
+  }, [me]);
 
   return (
     <>

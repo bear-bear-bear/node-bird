@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
-import router from 'next/router';
+import Router from 'next/router';
 
 import AppLayout from '../components/AppLayout';
 import SignupForm from '../components/SignupForm';
 
 const Signup = () => {
   const { me } = useSelector((state) => state.user);
-  if (me !== null) router.push('/');
+
+  useEffect(() => {
+    if (me !== null) Router.push('/');
+  }, [me]);
 
   return (
     <AppLayout>
