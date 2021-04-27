@@ -46,6 +46,10 @@ const initialState = {
     },
   ],
   imagePaths: [],
+  hasMorePost: true,
+  loadPostsDone: false,
+  loadPostsLoading: false,
+  loadPostsError: null,
   addPostDone: false,
   addPostLoading: false,
   addPostError: null,
@@ -60,26 +64,28 @@ const initialState = {
   // removeCommentError: null,
 };
 
-initialState.mainPosts.push(
-  ...Array(20).fill().map(() => ({
+export const generateDummyPost = (number) => Array(number).fill().map(() => ({
+  id: shortId.generate(),
+  User: {
     id: shortId.generate(),
+    nickname: faker.name.findName(),
+  },
+  content: faker.lorem.paragraph(),
+  Images: [{
+    src: 'https://via.placeholder.com/300.png/09f/fff',
+  }],
+  Comments: [{
     User: {
       id: shortId.generate(),
       nickname: faker.name.findName(),
     },
-    content: faker.lorem.paragraph(),
-    Images: [{
-      src: 'https://via.placeholder.com/300.png/09f/fff',
-    }],
-    Comments: [{
-      User: {
-        id: shortId.generate(),
-        nickname: faker.name.findName(),
-      },
-      content: faker.lorem.sentence(),
-    }],
-  })),
-);
+    content: faker.lorem.sentence(),
+  }],
+}));
+
+export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
+export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
+export const LOAD_POSTS_FAILURE = 'LOAD_POSTS_FAILURE';
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
@@ -129,6 +135,21 @@ const dummyComment = (data) => ({
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
+    case LOAD_POSTS_REQUEST:
+      draft.loadPostsLoading = true;
+      draft.loadPostDone = false;
+      draft.loadPostError = null;
+      break;
+    case LOAD_POSTS_SUCCESS:
+      draft.loadPostsLoading = false;
+      draft.loadPostDone = true;
+      draft.mainPosts = draft.mainPosts.concat(action.data);
+      draft.hasMorePosts = draft.mainPosts.length < 50;
+      break;
+    case LOAD_POSTS_FAILURE:
+      draft.loadPostsLoading = false;
+      draft.error = action.error;
+      break;
     case ADD_POST_REQUEST:
       draft.addPostLoading = true;
       draft.addPostDone = false;
