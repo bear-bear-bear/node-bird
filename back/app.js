@@ -1,10 +1,12 @@
-const http = require('http');
+const express = require('express');
 
-const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
-  res.writeHead('Jello node');
+const app = express();
+const port = 3065;
+
+app.get('/', (req, res) => {
+  res.send('hello');
 });
 
-server.listen(3065, () => {
-  console.log('서버 실행 중...');
+app.listen(port, () => {
+  console.log(`server is listening: http://localhost:${port}`);
 });
