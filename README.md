@@ -1,3 +1,3 @@
-## 리액트 트위터 클론코딩
+## 리액트를 사용한 트위터 클론코딩
 
 This project is updating...
