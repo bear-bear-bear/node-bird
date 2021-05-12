@@ -1,4 +1,4 @@
-## 프론트
+## front
 
 * next, react, redux, redux-saga
 * styled-components
