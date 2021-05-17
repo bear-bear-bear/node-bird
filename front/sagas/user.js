@@ -52,16 +52,15 @@ function* unfollow(action) {
 
 function logInAPI(data) {
   // !! not generator
-  return axios.post('/api/login', data);
+  return axios.post('/user/login', data);
 }
 
 function* logIn(action) {
   try {
-    // const result = yield call(logInAPI, action.data);
-    yield delay(1000);
+    const result = yield call(logInAPI, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({
@@ -73,16 +72,14 @@ function* logIn(action) {
 
 function logOutAPI() {
   // !! not generator
-  return axios.get('/api/logout');
+  return axios.get('/user/logout');
 }
 
 function* logOut() {
   try {
-    // const result = yield call(logOutAPI);
-    yield delay(1000);
+    yield call(logOutAPI);
     yield put({
       type: LOG_OUT_SUCCESS,
-      // data: result.data,
     });
   } catch (err) {
     yield put({
@@ -94,14 +91,12 @@ function* logOut() {
 
 function signUpAPI(data) {
   // !! not generator
-  return axios.post('http://localhost:8001/user', data);
+  return axios.post('/user', data);
 }
 
 function* signUp(action) {
   try {
     const result = yield call(signUpAPI, action.data);
-    console.log(result);
-    yield delay(1000);
     yield put({
       type: SIGN_UP_SUCCESS,
       // data: result.data,
