@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app"
   },
   "author": "bear-bear-bear",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
-    "dotenv": "^9.0.2"
+    "dotenv": "^9.0.2",
+    "nodemon": "^2.0.7"
   }
 }
