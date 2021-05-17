@@ -11,7 +11,7 @@ const Profile = () => {
   const { me } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (me === null) Router.push('/');
+    if (me === null) Router.replace('/');
   }, [me]);
 
   return (

@@ -11,8 +11,8 @@ const Signup = () => {
   const { signUpDone, signUpError } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (me !== null) Router.push('/');
-    if (signUpDone) Router.push('/');
+    if (me !== null) Router.replace('/');
+    if (signUpDone) Router.replace('/');
   }, [me, signUpDone]);
 
   useEffect(() => {
