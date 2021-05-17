@@ -8,10 +8,18 @@ import SignupForm from '../components/SignupForm';
 
 const Signup = () => {
   const { me } = useSelector((state) => state.user);
+  const { signUpDone, signUpError } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (me !== null) Router.push('/');
-  }, [me]);
+    if (signUpDone) Router.push('/');
+  }, [me, signUpDone]);
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
 
   return (
     <AppLayout>
