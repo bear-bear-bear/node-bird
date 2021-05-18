@@ -28,6 +28,7 @@ const FollowButton = ({ post }) => {
     return null;
   }
 
+  // TODO: 로딩을 각 카드 컴포넌트에서 개별 관리하도록 설정
   return (
     <Button loading={followLoading || unfollowLoading} onClick={onClickButton}>
       {isFollowing ? '언팔로우' : '팔로우'}
