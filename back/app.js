@@ -3,12 +3,14 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const cors = require('cors');
+const morgan = require('morgan');
+require('dotenv').config();
 
 const postRouter = require('./routes/post');
+const postsRouter = require('./routes/posts');
 const userRouter = require('./routes/user');
 const db = require('./models');
 const passportConfig = require('./passport');
-require('dotenv').config();
 
 const app = express();
 const port = 8001;
@@ -24,6 +26,7 @@ app.use(cors({
   origin: '*', // TODO: 추후 수정
   credentials: false,
 }));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
