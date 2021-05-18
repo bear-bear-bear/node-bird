@@ -3,11 +3,12 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 
 const { User, Post } = require('../models');
+const { isLoggedIn, isNotLoggedIn } = require('../routes/middlewares');
 
 const router = express.Router();
 
 // 로그인
-router.post('/login', (req, res, next) => {
+router.post('/login', isNotLoggedIn, (req, res, next) => {
   passport.authenticate('local', (serverError, user, clientError) => {
     if (serverError) {
       console.error(err);
@@ -44,14 +45,14 @@ router.post('/login', (req, res, next) => {
 });
 
 // 로그아웃
-router.get('/logout', (req, res, next) => {
+router.get('/logout', isLoggedIn, (req, res, next) => {
   req.logout();
   req.session.destroy();
   res.send('ok');
 });
 
 // 회원가입
-router.post('/', async (req, res, next) => { // POST /user/
+router.post('/', isNotLoggedIn, async (req, res, next) => { // POST /user/
   const { email, nickname, password } = req.body;
   try {
     const exUser = await User.findOne({ where: { email } });
