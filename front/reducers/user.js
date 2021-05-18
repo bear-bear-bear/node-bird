@@ -58,15 +58,6 @@ export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
 export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
 
-const dummyUser = (data) => ({
-  ...data,
-  nickname: 'bear',
-  id: 1,
-  Posts: [{ id: 1 }],
-  Followings: [{ nickname: 'people1' }, { nickname: 'people2' }, { nickname: 'people3' }],
-  Followers: [{ nickname: 'people1' }, { nickname: 'people2' }, { nickname: 'people3' }],
-});
-
 export const loginRequestAction = (data) => ({
   type: LOG_IN_REQUEST,
   data,
@@ -122,7 +113,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case FOLLOW_FAILURE:
       draft.followLoading = false;
-      draft.followDone = action.error;
+      draft.followError = action.error;
       break;
     case UNFOLLOW_REQUEST:
       draft.unfollowLoading = true;
@@ -136,7 +127,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case UNFOLLOW_FAILURE:
       draft.unfollowLoading = false;
-      draft.unfollowDone = action.error;
+      draft.unfollowError = action.error;
       break;
     case LOG_IN_REQUEST:
       draft.logInLoading = true;

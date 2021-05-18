@@ -23,8 +23,8 @@ db.sequelize.sync()
 passportConfig();
 
 app.use(cors({
-  origin: '*', // TODO: 추후 수정
-  credentials: false,
+  origin: 'http://localhost:3000',
+  credentials: true,
 }));
 app.use(morgan('dev'));
 app.use(express.json());
@@ -38,19 +38,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req, res) => {
-  res.send('hello');
-});
-
-app.get('/posts', (req, res) => {
-  res.json([
-    { id: 1, content: 'hello1' },
-    { id: 2, content: 'hello2' },
-    { id: 3, content: 'hello3' },
-  ]);
-});
-
 app.use('/post', postRouter);
+app.use('/posts', postsRouter);
 app.use('/user', userRouter);
 
 app.listen(port, () => {
