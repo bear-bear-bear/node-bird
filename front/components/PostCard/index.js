@@ -103,8 +103,8 @@ const PostCard = ({ post }) => {
             renderItem={(item) => (
               <li>
                 <Comment
-                  author={item.User?.nickname ?? '이거 맞냐?'}
-                  avatar={<Avatar>{item.User?.nickname[0] ?? '이거 맞냐고'}</Avatar>}
+                  author={item.User.nickname}
+                  avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
                   content={item.content}
                 />
               </li>
