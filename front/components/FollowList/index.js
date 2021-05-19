@@ -1,46 +1,53 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'antd';
 import { StopOutlined } from '@ant-design/icons';
 
 import * as S from './styles';
+import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../../reducers/user';
 
 const FollowList = ({ header, data }) => {
-  const grid = { gutter: 4, xs: 2, md: 3 };
+  const dispatch = useDispatch();
 
-  const Header = (
-    // 함수형으로 쓰지 않은건 의도된 것
-    <div>{header}</div>
-  );
-
-  const LoadMore = (
-    // 함수형으로 쓰지 않은건 의도된 것
-    <S.LoadMore>
-      <Button>더 보기</Button>
-    </S.LoadMore>
-  );
-
-  const Item = ({ nickname }) => (
-    <S.FollowItem>
-      <Card actions={[<StopOutlined key="stop" />]}>
-        <Card.Meta description={nickname} />
-      </Card>
-    </S.FollowItem>
-  );
-
-  Item.propTypes = {
-    nickname: PropTypes.string.isRequired,
+  const onCancle = (id) => () => {
+    switch (header) {
+      case '팔로잉 목록':
+        dispatch({
+          type: UNFOLLOW_REQUEST,
+          data: id,
+        });
+        break;
+      case '팔로워 목록':
+        dispatch({
+          type: REMOVE_FOLLOWER_REQUEST,
+          data: id,
+        });
+        break;
+      default:
+        break;
+    }
   };
 
   return (
     <S.FollowList
-      grid={grid}
+      grid={{ gutter: 4, xs: 2, md: 3 }}
       size="small"
-      header={Header}
-      loadMore={LoadMore}
+      header={<div>{header}</div>}
+      loadMore={(
+        <S.LoadMore>
+          <Button>더 보기</Button>
+        </S.LoadMore>
+      )}
       bordered
       dataSource={data}
-      renderItem={Item}
+      renderItem={({ nickname, id }) => (
+        <S.FollowItem>
+          <Card actions={[<StopOutlined key="stop" onClick={onCancle(id)} />]}>
+            <Card.Meta description={nickname} />
+          </Card>
+        </S.FollowItem>
+      )}
     />
   );
 };
