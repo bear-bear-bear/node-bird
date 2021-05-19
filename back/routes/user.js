@@ -97,4 +97,18 @@ router.post('/', isNotLoggedIn, async (req, res, next) => { // POST /user/
   }
 });
 
+// 닉네임 수정
+router.post('/nickname', isLoggedIn, async (req, res, next) => { // POST /user/
+  try {
+    const { nickname } = req.body;
+    const { id } = req.user;
+    await User.update({ nickname }, { where: { id }});
+    res.status(200).json({ nickname });
+  } catch (err) {
+    console.error(err);
+    next(error); // status 500
+  }
+});
+
+
 module.exports = router;

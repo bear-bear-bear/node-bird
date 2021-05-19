@@ -75,8 +75,20 @@ router.delete('/:postId/like', isLoggedIn, async(req, res, next) => { // DELETE 
 });
 
 // 게시글 삭제
-router.delete('/', (req, res) => { // DELETE /post
-  res.json({ id: 1 });
+router.delete('/:postId', isLoggedIn, async(req, res, next) => { // DELETE /post/:postId
+  try {
+    const { postId } = req.params;
+    await Post.destroy({
+      where: {
+        id: postId,
+        UserId: req.user.id,
+      },
+    });
+    res.status(200).json({ PostId: parseInt(postId, 10) });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
 });
 
 // 댓글 작성
