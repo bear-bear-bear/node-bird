@@ -28,6 +28,10 @@ const FollowButton = ({ post }) => {
     return null;
   }
 
+  if (me?.id === post.User.id) { // 게시글 작성자가 본인이라면 팔로우버튼 표시 x
+    return null;
+  }
+
   // TODO: 로딩을 각 카드 컴포넌트에서 개별 관리하도록 설정
   return (
     <Button loading={followLoading || unfollowLoading} onClick={onClickButton}>
