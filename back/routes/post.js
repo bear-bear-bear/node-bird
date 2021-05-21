@@ -170,4 +170,81 @@ router.post('/:postId/comment', isLoggedIn, async (req, res) => { //  POST /post
   }
 })
 
+// 리트윗
+router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post/:postId/retweet
+  try {
+    const { id: UserId } = req.user;
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+      include: [{
+        model: Post,
+        as: 'Retweet',
+      }],
+    });
+
+    // 게시물 유무 검증
+    if (!post) {
+      return res.status(403).send('존재하지 않는 게시글 입니다.');
+    }
+
+    // 셀프 리트윗 검증
+    const isRetweetOwnPost = UserId === post.UserId;
+    const isRetweetOwnPostThatRetweeted = UserId === post.Retweet?.UserId;
+    if(isRetweetOwnPost || isRetweetOwnPostThatRetweeted) {
+      return res.status(403).send('자신의 글은 리트윗할 수 없습니다.');
+    }
+
+    // 자신이 이미 리트윗했던 게시물인지 검증
+    const retweetTargetId = post.RetweetId || post.id;
+    const exPost = await Post.findOne({
+      where: {
+        UserId,
+        RetweetId: retweetTargetId,
+      }
+    });
+    if (exPost) {
+      return res.status(403).send('이미 리트윗한 글입니다');
+    }
+
+    const retweet = await Post.create({
+      UserId,
+      RetweetId: retweetTargetId,
+      content: 'retweet',
+    });
+    const retweetWithPrevPost = await Post.findOne({
+      where: { id: retweet.id },
+      include: [{
+        model: Post,
+        as: 'Retweet',
+        include: [{
+          model: User,
+          attributes: ['id', 'nickname'],
+        }, {
+          model: Image,
+        }],
+      },{
+        model: Image,
+      }, {
+        model: Comment,
+        include: [{
+          model: User, // 댓글 작성자
+          attributes: ['id', 'nickname'],
+        }],
+      }, {
+        model: User, // 게시글 작성자
+        attributes: ['id', 'nickname'],
+      }, {
+        model: User, // 좋아요 누른 사람
+        as: 'Likers',
+        attributes: ['id'],
+      }],
+    });
+
+    res.status(201).json(retweetWithPrevPost);
+  } catch (err) {
+    console.error(err);
+    next(error);
+  }
+})
+
 module.exports = router;

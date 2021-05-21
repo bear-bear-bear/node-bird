@@ -28,6 +28,9 @@ const initialState = {
   // removeCommentDone: false,
   // removeCommentLoading: false,
   // removeCommentError: null,
+  retweetDone: false,
+  retweetLoading: false,
+  retweetError: null,
 };
 
 export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST';
@@ -63,6 +66,10 @@ export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 // export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
 // export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
 // export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
+
+export const RETWEET_REQUEST = 'RETWEET_REQUEST';
+export const RETWEET_SUCCESS = 'RETWEET_SUCCESS';
+export const RETWEET_FAILURE = 'RETWEET_FAILURE';
 
 export const addComment = (data) => ({
   type: ADD_POST_REQUEST,
@@ -179,6 +186,21 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case ADD_COMMENT_FAILURE:
       draft.addCommentLoading = false;
       draft.addCommentError = action.error;
+      break;
+    case RETWEET_REQUEST:
+      draft.retweetLoading = true;
+      draft.retweetDone = false;
+      draft.retweetError = null;
+      break;
+    case RETWEET_SUCCESS: {
+      draft.mainPosts.unshift(action.data);
+      draft.retweetLoading = false;
+      draft.retweetDone = true;
+      break;
+    }
+    case RETWEET_FAILURE:
+      draft.retweetLoading = false;
+      draft.retweetError = action.error;
       break;
     default:
       break;

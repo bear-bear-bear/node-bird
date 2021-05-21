@@ -24,10 +24,6 @@ const FollowButton = ({ post }) => {
     }
   }, [isFollowing]);
 
-  if (me === null) { // 유저가 없다면 팔로우 버튼 표시 x
-    return null;
-  }
-
   if (me?.id === post.User.id) { // 게시글 작성자가 본인이라면 팔로우버튼 표시 x
     return null;
   }
