@@ -52,16 +52,23 @@ export const SlickWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  padding: 2rem;
+  margin-top: 1rem;
   text-align: center;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
 
   & img {
-    margin: 0 auto;
-    max-height: 750px;
+    width: 100vw;
+    max-width: 80vh;
+    height: auto;
   }
 `;
 
 export const Indicator = styled.div`
+  margin-top: 1rem;
   text-align: center;
 
   & > div {

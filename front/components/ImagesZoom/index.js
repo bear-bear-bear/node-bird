@@ -6,7 +6,7 @@ import * as S from './styles';
 
 const ImagesZoom = ({ images, onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  console.log('currentSlide', currentSlide);
   return (
     <S.Overlay>
       <S.Global />
@@ -17,16 +17,16 @@ const ImagesZoom = ({ images, onClose }) => {
       <S.SlickWrapper>
         <div>
           <Slick
-            initialSlide={0}
-            beforeChange={(slide) => setCurrentSlide(slide + 1)}
+            initialSlide={1}
+            beforeChange={(slide) => setCurrentSlide(slide)}
             infinite
             arrows={false}
             slidesToShow={1}
             slidesToScroll={1}
           >
-            {images.map((v) => (
-              <S.ImageWrapper key={v.src}>
-                <img src={v.src} alt={v.src} />
+            {images.map((image) => (
+              <S.ImageWrapper key={image.name}>
+                <img src={`http://localhost:8001/${image.name}`} alt={image.name} />
               </S.ImageWrapper>
             ))}
           </Slick>

@@ -40,16 +40,17 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => { // POST 
     const { image: imagePath, content } = req.body;
     const { id: UserId } = req.user;
     const post = await Post.create({ content, UserId });
-    console.log('imagePath', imagePath);
-    console.log('content', content);
-    console.log('UserId', UserId);
 
     if (imagePath) {
       if (Array.isArray(imagePath)) { // 이미지를 여러 개 올리면 imagePath: [a.png, b.png]
-        const images = await Promise.all(imagePath.map((path) => Image.create({ src: path })));
+        const images = await Promise.all(imagePath.map((imagePath) => Image.create({
+          name: imagePath,
+        })));
         await post.addImages(images);
       } else { // 이미지를 한개만 올리면 image: a.png
-        const image = await Image.create({ src: imagePath });
+        const image = await Image.create({
+          name: imagePath,
+        });
         await post.addImages(image);
       }
     }
