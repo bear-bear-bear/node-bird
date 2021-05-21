@@ -16,6 +16,9 @@ const initialState = {
   addPostDone: false,
   addPostLoading: false,
   addPostError: null,
+  uploadImagesDone: false,
+  uploadImagesLoading: false,
+  uploadImagesError: null,
   removePostDone: false,
   removePostLoading: false,
   removePostError: null,
@@ -43,6 +46,12 @@ export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 
+export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
+export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
+export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
+
+export const REMOVE_IMAGE = 'REMOVE_IMAGE';
+
 export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
@@ -54,11 +63,6 @@ export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 // export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
 // export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
 // export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
-
-export const addPost = (data) => ({
-  type: ADD_POST_REQUEST,
-  data,
-});
 
 export const addComment = (data) => ({
   type: ADD_POST_REQUEST,
@@ -127,6 +131,23 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case ADD_POST_FAILURE:
       draft.addPostLoading = false;
       draft.addPostError = action.error;
+      break;
+    case UPLOAD_IMAGES_REQUEST:
+      draft.uploadImagesLoading = true;
+      draft.uploadImagesDone = false;
+      draft.uploadImagesError = null;
+      break;
+    case UPLOAD_IMAGES_SUCCESS:
+      draft.uploadImagesLoading = false;
+      draft.uploadImagesDone = true;
+      draft.imagePaths = action.data;
+      break;
+    case UPLOAD_IMAGES_FAILURE:
+      draft.uploadImagesLoading = false;
+      draft.uploadImagesError = action.error;
+      break;
+    case REMOVE_IMAGE:
+      draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);
       break;
     case REMOVE_POST_REQUEST:
       draft.removePostLoading = true;

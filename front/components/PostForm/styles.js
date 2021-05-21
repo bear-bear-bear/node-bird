@@ -9,6 +9,6 @@ export const FloatButton = styled(Button)`
   float: right;
 `;
 
-export const imagesWrap = styled.div`
+export const ImagesWrap = styled.div`
   display: inline-block;
 `;

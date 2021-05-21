@@ -2,14 +2,13 @@ import React, { useCallback, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button } from 'antd';
 
-import { addPost } from '../../reducers/post';
+import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../../reducers/post';
 import useInput from '../../hooks/useInput';
 
 import * as S from './styles';
 
 const PostForm = () => {
   const dispatch = useDispatch();
-  const imageInput = useRef();
   const [text, onChangeText, setText] = useInput('');
   const { imagePaths, addPostDone } = useSelector((state) => state.post);
 
@@ -20,12 +19,42 @@ const PostForm = () => {
   }, [addPostDone]);
 
   const onSubmit = useCallback(() => {
-    dispatch(addPost(text));
+    if (!text || !text.trim()) {
+      return alert('게시글을 작성하세요');
+    }
+    const formData = new FormData();
+    imagePaths.forEach((path) => {
+      formData.append('image', path);
+    });
+    formData.append('content', text);
+    return dispatch({
+      type: ADD_POST_REQUEST,
+      data: formData,
+    });
   }, [text]);
 
+  const imageInput = useRef();
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
+
+  const onChangeImages = useCallback((e) => {
+    const imageFormData = new FormData();
+    Array.from(e.target.files).forEach((File) => {
+      imageFormData.append('image', File);
+    });
+    dispatch({
+      type: UPLOAD_IMAGES_REQUEST,
+      data: imageFormData,
+    });
+  });
+
+  const onRemoveImage = useCallback((index) => () => {
+    dispatch({
+      type: REMOVE_IMAGE,
+      data: index,
+    });
+  });
 
   return (
     <S.PostForm encType="multipart/form-data" onFinish={onSubmit}>
@@ -36,20 +65,20 @@ const PostForm = () => {
         placeholder="어떤 신기한 일이 있었나요?"
       />
       <div>
-        <input type="file" multiple hidden ref={imageInput} />
+        <input type="file" name="image" multiple hidden ref={imageInput} onChange={onChangeImages}/>
         <Button onClick={onClickImageUpload}>이미지 업로드</Button>
         <S.FloatButton type="primary" htmlType="submit">
           트윗하기
         </S.FloatButton>
       </div>
       <div>
-        {imagePaths.map((v) => (
-          <imagesWrap key={v}>
-            <img src={v} width={200} alt={v} />
+        {imagePaths.map((v, i) => (
+          <S.ImagesWrap key={v}>
+            <img src={`http://localhost:8001/${v}`} width={200} alt={v} />
             <div>
-              <Button>제거</Button>
+              <Button onClick={onRemoveImage(i)}>제거</Button>
             </div>
-          </imagesWrap>
+          </S.ImagesWrap>
         ))}
       </div>
     </S.PostForm>
