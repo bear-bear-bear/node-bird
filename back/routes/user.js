@@ -30,7 +30,8 @@ const getFullUserWithoutPassword = async (user) => {
 }
 
 // 유저 확인
-router.get('/', isLoggedIn, async (req, res, next) => { // GET /user
+router.get('/', async (req, res, next) => { // GET /user
+  console.log('🚚🚚🚚', req.headers);
   try {
     if (req.user) {
       const fullUserWithoutPassword = await getFullUserWithoutPassword(req.user);
@@ -46,6 +47,7 @@ router.get('/', isLoggedIn, async (req, res, next) => { // GET /user
 
 // 로그인
 router.post('/login', isNotLoggedIn, (req, res, next) => {
+  console.log('🚚🚚🚚', req.headers);
   passport.authenticate('local', (serverError, user, clientError) => {
     if (serverError) {
       console.error(err);
