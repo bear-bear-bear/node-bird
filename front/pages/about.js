@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
-// import { END } from 'redux-saga';
+import { END } from 'redux-saga';
 
 import { Avatar, Card } from 'antd';
 import AppLayout from '../components/AppLayout';
-// import wrapper from '../store/configureStore';
-// import { LOAD_USER_REQUEST } from '../reducers/user';
+import wrapper from '../store/configureStore';
+import { LOAD_USER_REQUEST } from '../reducers/user';
 
 const About = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -48,5 +48,17 @@ const About = () => {
     </AppLayout>
   );
 };
+
+export const getStaticProps = wrapper.getStaticProps(async (context) => {
+  const { dispatch, sagaTask } = context.store;
+
+  dispatch({
+    type: LOAD_USER_REQUEST,
+    data: 1,
+  });
+
+  dispatch(END);
+  await sagaTask.toPromise();
+});
 
 export default About;

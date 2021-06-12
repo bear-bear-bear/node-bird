@@ -31,13 +31,34 @@ const getFullUserWithoutPassword = async (user) => {
 
 // 유저 확인
 router.get('/', async (req, res, next) => { // GET /user
-  console.log('🚚🚚🚚', req.headers);
   try {
     if (req.user) {
       const fullUserWithoutPassword = await getFullUserWithoutPassword(req.user);
       res.status(200).json(fullUserWithoutPassword);
     } else {
       res.status(200).json(null);
+    }
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+// 특정 유저 확인
+router.get('/:userId', async (req, res, next) => { // GET /user/:userId
+  try {
+    const user = { id: req.params.userId };
+    const fullUserWithoutPassword = await getFullUserWithoutPassword(user);
+    
+    if (fullUserWithoutPassword) {
+      // 보안을 위해 다른 사람 정보 불러올 땐 개인 정보를 제외
+      const data = fullUserWithoutPassword.toJSON();
+      data.Posts = data.Posts.length;
+      data.Followers = data.Followers.length;
+      data.Followings = data.Followings.length;
+      res.status(200).json(data);
+    } else {
+      res.status(404).json('존재하지 않는 사용자입니다.');
     }
   } catch (err) {
     console.error(err);
