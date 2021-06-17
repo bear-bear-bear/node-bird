@@ -57,10 +57,11 @@ const Home = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+  // 브라우저에 쿠키가 있을 경우 req header에 쿠키 세팅
   const { req, store } = context;
 
   const cookie = req?.headers.cookie || '';
-  axios.defaults.headers.Cookie = '';
+  axios.defaults.headers.Cookie = ''; // 이전 CDN에 올라와 있던 쿠키 초기화
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
