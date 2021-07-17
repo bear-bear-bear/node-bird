@@ -53,7 +53,7 @@ router.get('/:userId', async (req, res, next) => { // GET /user/:userId
     if (fullUserWithoutPassword) {
       // 보안을 위해 다른 사람 정보 불러올 땐 개인 정보를 제외
       const data = fullUserWithoutPassword.toJSON();
-      data.Posts = data.Posts.length;
+      data.Posts = data.Posts.length; // 개인정보 침해 예방
       data.Followers = data.Followers.length;
       data.Followings = data.Followings.length;
       res.status(200).json(data);
