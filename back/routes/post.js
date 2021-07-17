@@ -30,8 +30,58 @@ const upload = multer({
 });
 
 // 이미지 업로드
-router.post('/images', isLoggedIn, upload.array('image'), (req, res, next) => { // POST /post/images
+router.post('/images', upload.array('image'), (req, res, next) => { // POST /post/images
   res.json(req.files.map((v) => v.filename));
+});
+
+// 게시글 하나 가져오기
+router.get('/:postId', async (req, res, next) => { // GET /post/:postId
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+
+    // 게시물 유무 검증
+    if (!post) {
+      return res.status(404).send('존재하지 않는 게시글 입니다.');
+    }
+
+    const fullPost = await Post.findOne({
+      where: { id: post.id },
+      include: [{
+        model: Post,
+        as: 'Retweet',
+        include: [{
+          model: User,
+          attributes: ['id', 'nickname'],
+        }, {
+          model: Image,
+        }],
+      },{
+        model: Image,
+      }, {
+        model: Comment,
+        include: [{
+          model: User, // 댓글 작성자
+          attributes: ['id', 'nickname'],
+        }],
+      }, {
+        model: User, // 게시글 작성자
+        attributes: ['id', 'nickname'],
+      }, {
+        model: User, // 좋아요 누른 사람
+        as: 'Likers',
+        attributes: ['id', 'nickname'],
+      }],
+    });
+    console.log('🎈🎈🎈🎈🎈🎈')
+    console.log({ id: post.id, fullPost })
+
+    res.status(201).json(fullPost);
+  } catch (err) {
+    console.error(err);
+    next(error);
+  }
 });
 
 // 게시글 작성
@@ -245,6 +295,6 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
     console.error(err);
     next(error);
   }
-})
+});
 
 module.exports = router;
