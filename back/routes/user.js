@@ -67,8 +67,7 @@ router.get('/:userId', async (req, res, next) => { // GET /user/:userId
 });
 
 // 로그인
-router.post('/login', isNotLoggedIn, (req, res, next) => {
-  console.log('🚚🚚🚚', req.headers);
+router.post('/login', isNotLoggedIn, (req, res, next) => { // post /user/login
   passport.authenticate('local', (serverError, user, clientError) => {
     if (serverError) {
       console.error(err);
@@ -91,7 +90,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 });
 
 // 로그아웃
-router.get('/logout', isLoggedIn, (req, res, next) => {
+router.post('/logout', isLoggedIn, (req, res, next) => { // POST /user/logout
   req.logout();
   req.session.destroy();
   res.send('ok');

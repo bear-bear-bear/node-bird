@@ -196,7 +196,7 @@ function* logIn(action) {
 
 function logOutAPI() {
   // !! not generator
-  return axios.get('/user/logout');
+  return axios.post('/user/logout');
 }
 
 function* logOut() {
