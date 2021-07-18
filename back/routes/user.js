@@ -1,8 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const { Op } = require('sequelize');
 
-const { User, Post } = require('../models');
+const { User, Post, Image, Comment } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('../routes/middlewares');
 
 const router = express.Router();
@@ -215,6 +216,54 @@ router.get('/followings', isLoggedIn, async (req, res, next) => { // GET /user/f
   } catch (err) {
     console.error(err);
     next(error);
+  }
+});
+
+// 작성한 포스트 목록
+router.get('/:userId/posts', async (req, res, next) => { // GET /user/:userId/posts
+  try {
+    const lastId = parseInt(req.query.lastId, 10);
+    const where = { UserId: req.params.userId };
+    if (lastId) { // 초기 로딩이 아닐때
+      where.id = { [Op.lt ]: lastId }
+    }
+    const posts = await Post.findAll({
+      where,
+      limit: 10,
+      order: [
+        ['createdAt', 'DESC'],
+        [Comment, 'createdAt', 'DESC'],
+      ],
+      include: [{
+        model: User, // 게시글 작성자
+        attributes: ['id', 'nickname'],
+      }, {
+        model: Comment,
+        include: [{
+          model: User, // 댓글 작성자
+          attributes: ['id', 'nickname'],
+        }]
+      }, {
+        model: Image,
+      }, {
+        model: User, // 좋아요 누른 사람
+        as: 'Likers',
+        attributes: ['id'],
+      }, {
+        model: Post,
+        as: 'Retweet',
+        include: [{
+          model: User,
+          attributes: ['id', 'nickname'],
+        }, {
+          model: Image,
+        }],
+      }],
+    });
+    res.status(200).json(posts);
+  } catch (err) {
+    console.error(err);
+    next(err);
   }
 });
 

@@ -59,7 +59,7 @@ function* unlikePost(action) {
 
 function loadUserPostsAPI(data, lastId) {
   // !! not generator
-  return axios.get(`/user/${data}?lastId=${lastId || 0}`);
+  return axios.get(`/user/${data}/posts?lastId=${lastId || 0}`);
 }
 
 function* loadUserPosts(action) {
