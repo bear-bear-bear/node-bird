@@ -5,7 +5,7 @@ const { Op } = require('sequelize');
 const { Post, Hashtag, Image, Comment, User } = require('../models');
 
 // 작성한 포스트 목록
-router.get('/:hashtag/posts', async (req, res, next) => { // GET /user/:userId/posts
+router.get('/:hashtag', async (req, res, next) => { // GET /hashtag/:hashtag
   try {
     const lastId = parseInt(req.query.lastId, 10);
     const where = {};
@@ -21,7 +21,7 @@ router.get('/:hashtag/posts', async (req, res, next) => { // GET /user/:userId/p
       ],
       include: [{
         model: Hashtag,
-        where: { name: req.params.hashtag },
+        where: { name: decodeURIComponent(req.params.hashtag) },
       }, {
         model: User, // 게시글 작성자
         attributes: ['id', 'nickname'],

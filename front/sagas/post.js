@@ -80,7 +80,7 @@ function* loadUserPosts(action) {
 
 function loadHashtagPostsAPI(data, lastId) {
   // !! not generator
-  return axios.get(`/hashtag/${data}?lastId=${lastId || 0}`);
+  return axios.get(`/hashtag/${encodeURIComponent(data)}?lastId=${lastId || 0}`);
 }
 
 function* loadHashtagPosts(action) {
