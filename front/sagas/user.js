@@ -136,7 +136,7 @@ function* removeFollower(action) {
 
 function loadFollowersAPI(data) {
   // !! not generator
-  return axios.get('/user/followers', data);
+  return axios.get(`/user/followers?limit=${data}`);
 }
 
 function* loadFollowers(action) {
@@ -156,7 +156,7 @@ function* loadFollowers(action) {
 
 function loadFollowingsAPI(data) {
   // !! not generator
-  return axios.get('/user/followings', data);
+  return axios.get(`/user/followings?limit=${data}`);
 }
 
 function* loadFollowings(action) {

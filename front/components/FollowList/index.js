@@ -7,7 +7,7 @@ import { StopOutlined } from '@ant-design/icons';
 import * as S from './styles';
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../../reducers/user';
 
-const FollowList = ({ header, data }) => {
+const FollowList = ({ header, data, onClickMore, loading }) => {
   const dispatch = useDispatch();
 
   const onCancle = (id) => () => {
@@ -36,7 +36,7 @@ const FollowList = ({ header, data }) => {
       header={<div>{header}</div>}
       loadMore={(
         <S.LoadMore>
-          <Button>더 보기</Button>
+          <Button onClick={onClickMore} loading={loading}>더 보기</Button>
         </S.LoadMore>
       )}
       bordered
@@ -55,6 +55,8 @@ const FollowList = ({ header, data }) => {
 FollowList.propTypes = {
   header: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
+  onClickMore: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default FollowList;

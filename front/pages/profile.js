@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +13,14 @@ import wrapper from '../store/configureStore';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
+  const { me, loadFollowersLoading, loadFollowingsLoading } = useSelector((state) => state.user);
+  const [followersLimit, setFollowersLimit] = useState(3);
+  const [followingsLimit, setFollowingsLimit] = useState(3);
+
+  const loadMoreData = (setLimitFunc, more = 3) => {
+    console.log({ followersLimit, followingsLimit });
+    setLimitFunc((prev) => prev + more);
+  };
 
   useEffect(() => {
     if (me === null) Router.replace('/');
@@ -22,9 +29,11 @@ const Profile = () => {
   useEffect(() => {
     dispatch({
       type: LOAD_FOLLOWERS_REQUEST,
+      data: followersLimit,
     });
     dispatch({
       type: LOAD_FOLLOWINGS_REQUEST,
+      data: followingsLimit,
     });
   }, []);
 
@@ -35,8 +44,18 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NicknameEditForm />
-        <FollowList header="팔로잉 목록" data={me?.Followings} />
-        <FollowList header="팔로워 목록" data={me?.Followers} />
+        <FollowList
+          header="팔로잉 목록"
+          data={me?.Followings}
+          onClickMore={() => loadMoreData(setFollowingsLimit)}
+          loading={loadFollowingsLoading}
+        />
+        <FollowList
+          header="팔로워 목록"
+          data={me?.Followers}
+          onClickMore={() => loadMoreData(setFollowersLimit)}
+          loading={loadFollowersLoading}
+        />
       </AppLayout>
     </>
   );
