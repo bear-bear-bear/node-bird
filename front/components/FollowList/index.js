@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { Button, Card } from 'antd';
 import { StopOutlined } from '@ant-design/icons';
 
-import * as S from './styles';
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../../reducers/user';
+
+import * as S from './styles';
 
 const FollowList = ({ header, data, onClickMore, loading }) => {
   const dispatch = useDispatch();
