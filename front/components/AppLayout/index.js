@@ -22,6 +22,14 @@ const AppLayout = ({ children }) => {
             <a href="home">노드버드</a>
           </Link>
         </Menu.Item>
+        <Menu.Item>
+          <S.SearchInput
+            enterButton
+            value={S.SearchInput}
+            onChange={onChangeSearchInput}
+            onSearch={onSearch}
+          />
+        </Menu.Item>
         { me ? (
           <Menu.Item>
             <Link href="/profile">
