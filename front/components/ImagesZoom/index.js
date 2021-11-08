@@ -7,8 +7,6 @@ import * as S from './styles';
 const ImagesZoom = ({ images, onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  console.log('ImagesZoom images', images);
-
   return (
     <S.Overlay>
       <S.Global />
@@ -27,8 +25,8 @@ const ImagesZoom = ({ images, onClose }) => {
             slidesToScroll={1}
           >
             {images.map((image) => (
-              <S.ImageWrapper key={image}>
-                <img src={image} alt={image} />
+              <S.ImageWrapper key={image.src}>
+                <img src={image.src} alt={image.src} />
               </S.ImageWrapper>
             ))}
           </Slick>

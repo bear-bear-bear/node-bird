@@ -17,8 +17,6 @@ const PostImages = ({ images }) => {
     setShowImagesZoom(false);
   }, []);
 
-  console.log('PostImages images', images);
-
   if (images.length === 1) {
     return (
       <S.OneImageWrapper>
