@@ -7,8 +7,18 @@ import createSagaMiddleware from 'redux-saga';
 import reducer from '../reducers';
 import rootSaga from '../sagas';
 
-const loggerMiddleware = ({ dispatch, getState }) => (next) => (action) => {
-  console.log(action);
+const alertError = (errorMessage) => {
+  if (typeof window === 'undefined') return;
+  alert(errorMessage);
+};
+
+const loggerMiddleware = () => (next) => (action) => {
+  console.log('action', action);
+
+  if (action.type.includes('FAILURE')) {
+    alertError(action.data);
+  }
+
   return next(action);
 };
 
