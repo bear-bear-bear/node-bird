@@ -50,9 +50,6 @@ const AppLayout = ({ children }) => {
             </Link>
           </Menu.Item>
         )}
-        <Menu.Item>
-          <S.SearchInput enterButton />
-        </Menu.Item>
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
