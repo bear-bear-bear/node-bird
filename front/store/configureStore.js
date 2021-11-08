@@ -13,9 +13,14 @@ const alertError = (errorMessage) => {
 };
 
 const loggerMiddleware = () => (next) => (action) => {
-  console.log('action', action);
+  const isProduction = process.env.NODE_ENV === 'production';
+  const isHydrate = action.type === '__NEXT_REDUX_WRAPPER_HYDRATE__';
+  const isError = action.type.includes('FAILURE');
 
-  if (action.type.includes('FAILURE')) {
+  if (!isProduction && !isHydrate) {
+    console.log('action', action);
+  }
+  if (isError) {
     alertError(action.data);
   }
 
