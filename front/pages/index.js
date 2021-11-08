@@ -18,14 +18,7 @@ const Home = () => {
     mainPosts,
     hasMorePosts,
     loadPostsLoading,
-    retweetError,
   } = useSelector((state) => state.post);
-
-  useEffect(() => {
-    if (retweetError) {
-      alert(retweetError);
-    }
-  }, [retweetError]);
 
   useEffect(() => {
     function onScroll() {

@@ -37,13 +37,7 @@ const PostCard = ({ post }) => {
   const datetime = post.createdAt;
   const fromNow = moment(datetime).fromNow();
 
-  const isUser = () => {
-    if (id) {
-      return true;
-    }
-    alert('로그인이 필요합니다.');
-    return false;
-  };
+  const isUser = () => (!!id);
 
   const onRetweet = useCallback(() => {
     if (!isUser()) return;
