@@ -18,7 +18,6 @@ const Profile = () => {
   const [followingsLimit, setFollowingsLimit] = useState(3);
 
   const loadMoreData = (setLimitFunc, more = 3) => {
-    console.log({ followersLimit, followingsLimit });
     setLimitFunc((prev) => prev + more);
   };
 

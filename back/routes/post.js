@@ -11,12 +11,12 @@ const { isLoggedIn } = require('../routes/middlewares');
 
 const router = express.Router();
 
-try {
-  fs.accessSync('uploads');
-} catch (err) {
-  console.log('uploads 디렉터리가 없으므로 새로 생성합니다.');
-  fs.mkdirSync('uploads');
-}
+// try {
+//   fs.accessSync('uploads');
+// } catch (err) {
+//   console.log('uploads 디렉터리가 없으므로 새로 생성합니다.');
+//   fs.mkdirSync('uploads');
+// }
 
 AWS.config.update({
   accessKeyId: process.env.S3_ACCESS_KEY_ID,
@@ -80,8 +80,6 @@ router.get('/:postId', async (req, res, next) => { // GET /post/:postId
         attributes: ['id', 'nickname'],
       }],
     });
-    console.log('🎈🎈🎈🎈🎈🎈')
-    console.log({ id: post.id, fullPost })
 
     res.status(201).json(fullPost);
   } catch (err) {
