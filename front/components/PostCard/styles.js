@@ -11,3 +11,8 @@ export const CardWrapper = styled.div`
     margin-top: 0.33rem;
   }
 `;
+
+export const Time = styled.time`
+  float: right;
+  color: gray;
+`;

@@ -10,6 +10,7 @@ import {
   MessageOutlined,
   EllipsisOutlined,
 } from '@ant-design/icons';
+import moment from 'moment';
 
 import PostImages from '../PostImages';
 import CommentForm from '../CommentForm';
@@ -24,12 +25,17 @@ import {
 
 import * as S from './styles';
 
+moment.locale('ko');
+
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const [commentFormOpened, setCommentFormOpened] = useState(false);
   const id = useSelector((state) => state.user.me?.id);
   const liked = post.Likers.find((v) => v.id === id);
   const { removePostLoading } = useSelector((state) => state.post);
+
+  const datetime = post.createdAt;
+  const fromNow = moment(datetime).fromNow();
 
   const isUser = () => {
     if (id) {
@@ -109,30 +115,36 @@ const PostCard = ({ post }) => {
       >
         {post.RetweetId && post.Retweet
           ? (
-            <Card.Meta
-              avatar={(
-                <Link href={`/user/${post.Retweet.User.id}`}>
-                  <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
-                </Link>
+            <>
+              <S.Time datetime={datetime}>{fromNow}</S.Time>
+              <Card.Meta
+                avatar={(
+                  <Link href={`/user/${post.Retweet.User.id}`}>
+                    <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
+                  </Link>
               )}
-              title={post.Retweet.User.nickname}
-              description={(
-                <PostCardContent
-                  postData={post.Retweet.content}
-                  retweetFrom={post.User.nickname}
-                />
+                title={post.Retweet.User.nickname}
+                description={(
+                  <PostCardContent
+                    postData={post.Retweet.content}
+                    retweetFrom={post.User.nickname}
+                  />
               )}
-            />
+              />
+            </>
           ) : (
-            <Card.Meta
-              avatar={(
-                <Link href={`/user/${post.User.id}`}>
-                  <a><Avatar>{post.User.nickname[0]}</Avatar></a>
-                </Link>
+            <>
+              <S.Time datetime={datetime}>{fromNow}</S.Time>
+              <Card.Meta
+                avatar={(
+                  <Link href={`/user/${post.User.id}`}>
+                    <a><Avatar>{post.User.nickname[0]}</Avatar></a>
+                  </Link>
               )}
-              title={post.User.nickname}
-              description={<PostCardContent postData={post.content} />}
-            />
+                title={post.User.nickname}
+                description={<PostCardContent postData={post.content} />}
+              />
+            </>
           )}
       </Card>
       {commentFormOpened && (
