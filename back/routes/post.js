@@ -2,6 +2,9 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
+
 
 const { Post, Image, Comment, User, Hashtag } = require('../models');
 const { isLoggedIn } = require('../routes/middlewares');
@@ -15,23 +18,26 @@ try {
   fs.mkdirSync('uploads');
 }
 
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: 'ap-northeast-2',
+
+})
 const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, done) {
-      done(null, 'uploads');
-    },
-    filename(req, file, done) { // abcd.png
-      const ext = path.extname(file.originalname); // png
-      const basename = path.basename(file.originalname, ext) // abcd
-      done(null, basename + '_' + new Date().getTime() + ext); // abcd209901011234.png
-    },
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: 'bearsns',
+    key(req, file, cb) {
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}}`)
+    }
   }),
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
 });
 
 // 이미지 업로드
 router.post('/images', upload.array('image'), (req, res, next) => { // POST /post/images
-  res.json(req.files.map((v) => v.filename));
+  res.json(req.files.map((v) => v.location));
 });
 
 // 게시글 하나 가져오기
