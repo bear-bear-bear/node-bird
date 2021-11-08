@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const cors = require('cors');
 const morgan = require('morgan');
+const hpp = require('hpp');
+const helmet = require('helmet');
 require('dotenv').config();
 
 const postRouter = require('./routes/post');
@@ -24,11 +26,17 @@ db.sequelize.sync()
   .catch(console.error);
 passportConfig();
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined'));
+  app.use(hpp());
+  app.use(helmet());
+} else {
+  app.use(morgan('dev'));
+}
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'nodebird.com'],
   credentials: true,
 }));
-app.use(morgan('dev'));
 app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
