@@ -108,7 +108,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     }
     case LIKE_POST_FAILURE:
       draft.likePostLoading = false;
-      draft.likePostError = action.error;
+      draft.likePostError = action.data;
       break;
     case UNLIKE_POST_REQUEST:
       draft.unlikePostLoading = true;
@@ -124,7 +124,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     }
     case UNLIKE_POST_FAILURE:
       draft.unlikePostLoading = false;
-      draft.unlikePostError = action.error;
+      draft.unlikePostError = action.data;
       break;
     case LOAD_POSTS_REQUEST:
     case LOAD_USER_POSTS_REQUEST:
@@ -145,7 +145,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case LOAD_USER_POSTS_FAILURE:
     case LOAD_HASHTAG_POSTS_FAILURE:
       draft.loadPostsLoading = false;
-      draft.loadPostsError = action.error;
+      draft.loadPostsError = action.data;
       break;
     case LOAD_POST_REQUEST:
       draft.loadPostLoading = true;
@@ -159,7 +159,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case LOAD_POST_FAILURE:
       draft.loadPostLoading = false;
-      draft.loadPostError = action.error;
+      draft.loadPostError = action.data;
       break;
     case ADD_POST_REQUEST:
       draft.addPostLoading = true;
@@ -174,7 +174,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case ADD_POST_FAILURE:
       draft.addPostLoading = false;
-      draft.addPostError = action.error;
+      draft.addPostError = action.data;
       break;
     case UPLOAD_IMAGES_REQUEST:
       draft.uploadImagesLoading = true;
@@ -188,7 +188,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case UPLOAD_IMAGES_FAILURE:
       draft.uploadImagesLoading = false;
-      draft.uploadImagesError = action.error;
+      draft.uploadImagesError = action.data;
       break;
     case REMOVE_IMAGE:
       draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);
@@ -205,7 +205,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case REMOVE_POST_FAILURE:
       draft.removePostLoading = false;
-      draft.removePostError = action.error;
+      draft.removePostError = action.data;
       break;
     case ADD_COMMENT_REQUEST:
       draft.addCommentLoading = true;
@@ -221,7 +221,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     }
     case ADD_COMMENT_FAILURE:
       draft.addCommentLoading = false;
-      draft.addCommentError = action.error;
+      draft.addCommentError = action.data;
       break;
     case RETWEET_REQUEST:
       draft.retweetLoading = true;
@@ -236,7 +236,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     }
     case RETWEET_FAILURE:
       draft.retweetLoading = false;
-      draft.retweetError = action.error;
+      draft.retweetError = action.data;
       break;
     default:
       break;
