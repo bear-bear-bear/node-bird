@@ -15,7 +15,7 @@ const db = require('./models');
 const passportConfig = require('./passport');
 
 const app = express();
-const port = 8001;
+const port = 80;
 
 db.sequelize.sync()
   .then(() => {
