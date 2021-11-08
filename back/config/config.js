@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-exports.FRONT_URL = 'http://13.125.73.95';
 const password = process.env.DB_PASSWORD;
 
 module.exports = {
