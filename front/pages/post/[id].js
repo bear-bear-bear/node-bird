@@ -16,6 +16,8 @@ const Post = () => {
   const { id } = router.query;
   const { singlePost } = useSelector((state) => state.post);
 
+  console.log(singlePost.Images);
+
   return (
     <AppLayout>
       <Head>
@@ -25,7 +27,7 @@ const Post = () => {
         <meta name="description" content={singlePost.content} />
         <meta property="og:title" content={singlePost.content} />
         <meta property="og:description" content={`${singlePost.User.nickname}님의 게시글`} />
-        <meta property="og:image" content={singlePost.Images[0]?.src || 'https://nodebird.com/favicon.ico'} />
+        <meta property="og:image" content={singlePost.Images[0] || 'https://nodebird.com/favicon.ico'} />
         <meta property="og:url" content={`https://nodebird.com/post/${id}`} />
       </Head>
       <PostCard post={singlePost} />
