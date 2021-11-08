@@ -4,6 +4,7 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import ImagesZoom from '../ImagesZoom';
 
+import { BACK_URL } from '../../config/config';
 import * as S from './styles';
 
 const PostImages = ({ images }) => {
@@ -17,7 +18,7 @@ const PostImages = ({ images }) => {
     setShowImagesZoom(false);
   }, []);
 
-  const sources = images.map((image) => `http://localhost:8001/${image.name}`);
+  const sources = images.map((image) => `${BACK_URL}/${image.name}`);
 
   if (images.length === 1) {
     return (

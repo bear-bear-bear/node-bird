@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Slick from 'react-slick';
 import PropTypes from 'prop-types';
 
+import { BACK_URL } from '../../config/config';
 import * as S from './styles';
 
 const ImagesZoom = ({ images, onClose }) => {
@@ -26,7 +27,7 @@ const ImagesZoom = ({ images, onClose }) => {
           >
             {images.map((image) => (
               <S.ImageWrapper key={image.name}>
-                <img src={`http://localhost:8001/${image.name}`} alt={image.name} />
+                <img src={`${BACK_URL}/${image.name}`} alt={image.name} />
               </S.ImageWrapper>
             ))}
           </Slick>

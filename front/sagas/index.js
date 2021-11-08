@@ -3,8 +3,9 @@ import axios from 'axios';
 
 import userSaga from './user';
 import postSaga from './post';
+import { BACK_URL } from '../config/config';
 
-axios.defaults.baseURL = 'http://localhost:8001';
+axios.defaults.baseURL = BACK_URL;
 axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {
