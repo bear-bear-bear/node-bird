@@ -202,7 +202,7 @@ router.get('/followings', isLoggedIn, async (req, res, next) => { // GET /user/f
   }
 });
 
-// 작성한 포스트 목록
+// 작성한 게시글 목록
 router.get('/:userId/posts', async (req, res, next) => { // GET /user/:userId/posts
   try {
     const lastId = parseInt(req.query.lastId, 10);

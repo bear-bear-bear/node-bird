@@ -18,7 +18,7 @@ const UserProfile = () => {
       actions={[
         <div key="twit">
           <Link href={`/user/${me.id}`}>
-            <a>트윗<br />{me.Posts.length}</a>
+            <a>올린 글<br />{me.Posts.length}</a>
           </Link>
         </div>,
         <div key="following">

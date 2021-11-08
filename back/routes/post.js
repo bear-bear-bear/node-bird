@@ -220,7 +220,7 @@ router.post('/:postId/comment', isLoggedIn, async (req, res) => { //  POST /post
   }
 })
 
-// 리트윗
+// 게시글공유
 router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post/:postId/retweet
   try {
     const { id: UserId } = req.user;
@@ -237,14 +237,14 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
       return res.status(403).send('존재하지 않는 게시글 입니다.');
     }
 
-    // 셀프 리트윗 검증
+    // 셀프 게시글공유 검증
     const isRetweetOwnPost = UserId === post.UserId;
     const isRetweetOwnPostThatRetweeted = UserId === post.Retweet?.UserId;
     if(isRetweetOwnPost || isRetweetOwnPostThatRetweeted) {
-      return res.status(403).send('자신의 글은 리트윗할 수 없습니다.');
+      return res.status(403).send('자신의 글은 게시글공유할 수 없습니다.');
     }
 
-    // 자신이 이미 리트윗했던 게시물인지 검증
+    // 자신이 이미 게시글공유했던 게시물인지 검증
     const retweetTargetId = post.RetweetId || post.id;
     const exPost = await Post.findOne({
       where: {
@@ -253,7 +253,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
       }
     });
     if (exPost) {
-      return res.status(403).send('이미 리트윗한 글입니다');
+      return res.status(403).send('이미 게시글공유한 글입니다');
     }
 
     const retweet = await Post.create({

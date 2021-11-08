@@ -20,7 +20,7 @@ const PostForm = () => {
 
   const onSubmit = useCallback(() => {
     if (!text || !text.trim()) {
-      return alert('게시글을 작성하세요');
+      return alert('빈 게시글은 제출할 수 없습니다.');
     }
     const formData = new FormData();
     imagePaths.forEach((path) => {
@@ -65,10 +65,10 @@ const PostForm = () => {
         placeholder="어떤 신기한 일이 있었나요?"
       />
       <div>
-        <input type="file" name="image" multiple hidden ref={imageInput} onChange={onChangeImages}/>
+        <input type="file" name="image" multiple hidden ref={imageInput} onChange={onChangeImages} />
         <Button onClick={onClickImageUpload}>이미지 업로드</Button>
         <S.FloatButton type="primary" htmlType="submit">
-          트윗하기
+          게시글 작성
         </S.FloatButton>
       </div>
       <div>

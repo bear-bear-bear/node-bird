@@ -6,7 +6,7 @@ module.exports = {
   'development': {
     'username': 'root',
     'password': password,
-    'database': 'react-nodebird',
+    'database': 'react-SNSClone',
     'host': '127.0.0.1',
     'dialect': 'mysql'
   },
