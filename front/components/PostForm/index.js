@@ -74,7 +74,7 @@ const PostForm = () => {
       <div>
         {imagePaths.map((v, i) => (
           <S.ImagesWrap key={v}>
-            <img src={`${v}`} width={200} alt={v} />
+            <img src={v} width={200} alt={v} />
             <div>
               <Button onClick={onRemoveImage(i)}>제거</Button>
             </div>
