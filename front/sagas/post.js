@@ -28,7 +28,6 @@ function* likePost(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: LIKE_POST_FAILURE,
       error: err.response.data,
@@ -49,7 +48,6 @@ function* unlikePost(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: UNLIKE_POST_FAILURE,
       error: err.response.data,
@@ -70,7 +68,6 @@ function* loadUserPosts(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: LOAD_USER_POSTS_FAILURE,
       error: err.response.data,
@@ -91,7 +88,6 @@ function* loadHashtagPosts(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: LOAD_HASHTAG_POSTS_FAILURE,
       error: err.response.data,
@@ -112,7 +108,6 @@ function* loadPosts(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: LOAD_POSTS_FAILURE,
       error: err.response.data,
@@ -133,7 +128,6 @@ function* loadPost(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: LOAD_POST_FAILURE,
       error: err.response?.data,
@@ -158,7 +152,6 @@ function* addPost(action) {
       data: result.data.id,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: ADD_POST_FAILURE,
       error: err.response.data,
@@ -179,7 +172,6 @@ function* uploadImages(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: UPLOAD_IMAGES_FAILURE,
       error: err.response.data,
@@ -205,7 +197,6 @@ function* removePost(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: REMOVE_POST_FAILURE,
       error: err.response.data,
@@ -226,7 +217,6 @@ function* addComment(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: ADD_COMMENT_FAILURE,
       error: err.response.data,
@@ -247,7 +237,6 @@ function* retweet(action) {
       data: result.data,
     });
   } catch (err) {
-    alert(err.response.data);
     yield put({
       type: RETWEET_FAILURE,
       error: err.response.data,
