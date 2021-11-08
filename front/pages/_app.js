@@ -5,18 +5,18 @@ import 'antd/dist/antd.css';
 
 import wrapper from '../store/configureStore';
 
-const SNSClone = ({ Component }) => (
+const App = ({ Component }) => (
   <>
     <Head>
       <meta charSet="utf-8" />
-      <title>SNS Clone</title>
+      <title>sns clone</title>
     </Head>
     <Component />
   </>
 );
 
-SNSClone.propTypes = {
+App.propTypes = {
   Component: PropTypes.elementType.isRequired,
 };
 
-export default wrapper.withRedux(SNSClone);
+export default wrapper.withRedux(App);

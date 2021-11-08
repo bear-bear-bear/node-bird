@@ -40,7 +40,7 @@ const Profile = () => {
   return (
     <>
       <Head>
-        <title>내 프로필 | SNSClone</title>
+        <title>내 프로필 | sns-clone</title>
       </Head>
       <AppLayout>
         <NicknameEditForm />
