@@ -1,1 +1,1 @@
-export const BACK_URL = 'http://54.180.132.125';
+export const BACK_URL = 'http://api.bearsns.com';

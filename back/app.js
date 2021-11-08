@@ -15,7 +15,6 @@ const userRouter = require('./routes/user');
 const hashtagRouter = require('./routes/hashtag');
 const db = require('./models');
 const passportConfig = require('./passport');
-const { FRONT_URL } = require('./config/config');
 
 const app = express();
 const port = 80;
@@ -35,7 +34,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'));
 }
 app.use(cors({
-  origin: ['http://localhost:80', 'nodebird.com', 'http://52.78.145.168'],
+  origin: ['http://localhost:80', 'nodebird.com', 'http://bearsns.com'],
   credentials: true,
 }));
 app.use('/', express.static(path.join(__dirname, 'uploads')));
