@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Menu, Row, Col } from 'antd';
@@ -7,11 +8,17 @@ import { GithubOutlined } from '@ant-design/icons';
 
 import UserProfile from '../UserProfile';
 import LoginForm from '../LoginForm';
+import useInput from '../../hooks/useInput';
 
 import * as S from './styles';
 
 const AppLayout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
+  const [searchInput, onChangeSearchInput] = useInput('');
+
+  const onSearch = useCallback(() => {
+    Router.push(`/hashtag/${searchInput}`);
+  }, [searchInput]);
 
   return (
     <div>
@@ -25,7 +32,7 @@ const AppLayout = ({ children }) => {
         <Menu.Item>
           <S.SearchInput
             enterButton
-            value={S.SearchInput}
+            value={searchInput}
             onChange={onChangeSearchInput}
             onSearch={onSearch}
           />
