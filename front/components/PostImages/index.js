@@ -22,7 +22,7 @@ const PostImages = ({ images }) => {
   if (images.length === 1) {
     return (
       <S.OneImageWrapper>
-        <S.Image role="presentation" size="auto" src={images[0].src} alt={images[0].name} onClick={onZoom} />
+        <S.Image role="presentation" size="auto" src={images[0].src} alt={images[0].src} onClick={onZoom} />
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </S.OneImageWrapper>
     );
@@ -30,8 +30,8 @@ const PostImages = ({ images }) => {
   if (images.length === 2) {
     return (
       <>
-        <S.Image role="presentation" size="halfSize" src={images[0].src} alt={images[0].name} onClick={onZoom} />
-        <S.Image role="presentation" size="halfSize" src={images[1].src} alt={images[1].name} onClick={onZoom} />
+        <S.Image role="presentation" size="halfSize" src={images[0].src} alt={images[0].src} onClick={onZoom} />
+        <S.Image role="presentation" size="halfSize" src={images[1].src} alt={images[1].src} onClick={onZoom} />
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>
     );
@@ -40,7 +40,7 @@ const PostImages = ({ images }) => {
     return (
       <>
         <div>
-          <S.Image role="presentation" size="halfSize" src={images[0].src} alt={images[0].name} onClick={onZoom} />
+          <S.Image role="presentation" size="halfSize" src={images[0].src} alt={images[0].src} onClick={onZoom} />
           <S.MoreWrapper role="presentation" onClick={onZoom}>
             <PlusOutlined />
             <br />
