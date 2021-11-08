@@ -7,7 +7,7 @@ import * as S from './styles';
 const ImagesZoom = ({ images, onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  console.log('images', images);
+  console.log('ImagesZoom images', images);
 
   return (
     <S.Overlay>
