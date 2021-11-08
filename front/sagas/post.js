@@ -30,7 +30,7 @@ function* likePost(action) {
   } catch (err) {
     yield put({
       type: LIKE_POST_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -50,7 +50,7 @@ function* unlikePost(action) {
   } catch (err) {
     yield put({
       type: UNLIKE_POST_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -70,7 +70,7 @@ function* loadUserPosts(action) {
   } catch (err) {
     yield put({
       type: LOAD_USER_POSTS_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -90,7 +90,7 @@ function* loadHashtagPosts(action) {
   } catch (err) {
     yield put({
       type: LOAD_HASHTAG_POSTS_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -110,7 +110,7 @@ function* loadPosts(action) {
   } catch (err) {
     yield put({
       type: LOAD_POSTS_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -130,7 +130,7 @@ function* loadPost(action) {
   } catch (err) {
     yield put({
       type: LOAD_POST_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -154,7 +154,7 @@ function* addPost(action) {
   } catch (err) {
     yield put({
       type: ADD_POST_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -174,7 +174,7 @@ function* uploadImages(action) {
   } catch (err) {
     yield put({
       type: UPLOAD_IMAGES_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -199,7 +199,7 @@ function* removePost(action) {
   } catch (err) {
     yield put({
       type: REMOVE_POST_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -219,7 +219,7 @@ function* addComment(action) {
   } catch (err) {
     yield put({
       type: ADD_COMMENT_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
@@ -239,7 +239,7 @@ function* retweet(action) {
   } catch (err) {
     yield put({
       type: RETWEET_FAILURE,
-      data: err.response?.data,
+      data: err.response?.data || null,
     });
   }
 }
