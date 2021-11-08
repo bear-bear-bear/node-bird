@@ -9,6 +9,7 @@ import rootSaga from '../sagas';
 
 const alertError = (errorMessage) => {
   if (typeof window === 'undefined') return;
+  if (!!errorMessage === false) return;
   alert(errorMessage);
 };
 
