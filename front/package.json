@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next",
     "build": "npx cross-env ANALYZE=true NODE_ENV=production next build",
-    "start": "npx cross-env NODE_ENV=production next start -p 80"
+    "_start": "npx cross-env NODE_ENV=production next start -p 80",
+    "start": "npx pm2 start npm -- start"
   },
   "author": "bear-bear-bear",
   "license": "ISC",
