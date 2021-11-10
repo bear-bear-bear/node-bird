@@ -84,24 +84,24 @@ const PostCard = ({ post }) => {
         cover={images && <PostImages images={images} />}
         actions={[
           (
-            <S.IconWithCountWrapper>
-              <RetweetOutlined key="retweet" onClick={onRetweet} title="리트윗" />
+            <S.IconWithCountWrapper onClick={onRetweet}>
+              <RetweetOutlined key="retweet" title="리트윗" />
               <p>{post.RetweetTo?.length || 0}</p>
             </S.IconWithCountWrapper>
           ),
           (
-            <S.IconWithCountWrapper>
+            <S.IconWithCountWrapper onClick={onUnlike}>
               {
                 liked
-                  ? <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onUnlike} title="좋아요 취소" />
+                  ? <HeartTwoTone twoToneColor="#eb2f96" key="heart" title="좋아요 취소" />
                   : <HeartOutlined key="heart" onClick={onLike} title="좋아요" />
               }
               <p>{post.Likers.length}</p>
             </S.IconWithCountWrapper>
           ),
           (
-            <S.IconWithCountWrapper>
-              <MessageOutlined key="comment" onClick={onToggleComment} title="댓글" />
+            <S.IconWithCountWrapper onClick={onToggleComment}>
+              <MessageOutlined key="comment" title="댓글" />
               <p>{post.Comments.length}</p>
             </S.IconWithCountWrapper>
           ),
