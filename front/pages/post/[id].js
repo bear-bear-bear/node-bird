@@ -41,7 +41,7 @@ const Post = () => {
         <meta name="description" content={singlePost.content} />
         <meta property="og:title" content={singlePost.content} />
         <meta property="og:description" content={`${singlePost.User.nickname}님의 게시글`} />
-        <meta property="og:image" content={singlePost.Images[0] || 'http://bearsns.com/favicon.ico'} />
+        <meta property="og:image" content={singlePost.Images[0]?.src || 'http://bearsns.com/favicon.ico'} />
         <meta property="og:url" content={`http://bearsns.com/post/${id}`} />
       </Head>
       <PostCard post={singlePost} />
