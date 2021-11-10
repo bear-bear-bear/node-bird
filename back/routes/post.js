@@ -186,13 +186,13 @@ router.delete('/:postId/like', isLoggedIn, async(req, res, next) => { // DELETE 
 router.delete('/:postId', isLoggedIn, async(req, res, next) => { // DELETE /post/:postId
   try {
     const { postId } = req.params;
-    await Post.destroy({
+    const deletedPost = await Post.destroy({
       where: {
         id: postId,
         UserId: req.user.id,
       },
     });
-    res.status(200).json({ PostId: parseInt(postId, 10) });
+    res.status(200).json(deletedPost);
   } catch (err) {
     console.error(err);
     next(err);
@@ -273,7 +273,6 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
     const retweetedPost = await retweet.getRetweetFrom();
     const prevRetweetTo = (await retweetedPost.getRetweetTo()) || [];
     await retweetedPost.setRetweetTo([...prevRetweetTo, retweet]);
-    console.log('next retweetedPost', retweetedPost)
 
     const retweetWithPrevPost = await Post.findOne({
       where: { id: retweet.id },

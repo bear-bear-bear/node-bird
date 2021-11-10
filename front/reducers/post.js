@@ -87,10 +87,7 @@ export const RETWEET_REQUEST = 'RETWEET_REQUEST';
 export const RETWEET_SUCCESS = 'RETWEET_SUCCESS';
 export const RETWEET_FAILURE = 'RETWEET_FAILURE';
 
-export const addComment = (data) => ({
-  type: ADD_POST_REQUEST,
-  data,
-});
+export const CHANGE_RETWEET_COUNT = 'CHANGE_RETWEET_COUNT';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -237,6 +234,24 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case RETWEET_FAILURE:
       draft.retweetLoading = false;
       draft.retweetError = action.data;
+      break;
+    case CHANGE_RETWEET_COUNT: {
+      const post = action.data;
+      const { RetweetFromId: originId, id: instanceId } = post;
+      const changeType = draft.mainPosts.map((v) => v.id).includes(instanceId) ? 'ADDED' : 'REMOVED';
+      const originPost = draft.mainPosts.find((v) => v.id === originId);
+
+      switch (changeType) {
+        case 'ADDED':
+          originPost.RetweetTo = originPost.RetweetTo.unshift({ id: instanceId });
+          break;
+        case 'REMOVED':
+          originPost.RetweetTo = originPost.RetweetTo.filter((id) => id !== instanceId);
+          break;
+        default:
+          break;
+      }
+    }
       break;
     default:
       break;

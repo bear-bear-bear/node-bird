@@ -12,6 +12,7 @@ import {
   LOAD_POST_REQUEST, LOAD_POST_SUCCESS, LOAD_POST_FAILURE,
   LOAD_USER_POSTS_REQUEST, LOAD_HASHTAG_POSTS_REQUEST, LOAD_USER_POSTS_SUCCESS,
   LOAD_USER_POSTS_FAILURE, LOAD_HASHTAG_POSTS_SUCCESS, LOAD_HASHTAG_POSTS_FAILURE,
+  CHANGE_RETWEET_COUNT,
 } from '../reducers/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user';
 
@@ -189,10 +190,14 @@ function* removePost(action) {
     const result = yield call(removePostAPI, action.data);
     yield put({
       type: REMOVE_POST_SUCCESS,
-      data: result.data,
+      data: result.data.id,
     });
     yield put({
       type: REMOVE_POST_OF_ME,
+      data: result.data.id,
+    });
+    yield put({
+      type: CHANGE_RETWEET_COUNT,
       data: result.data,
     });
   } catch (err) {
@@ -234,6 +239,10 @@ function* retweet(action) {
     yield put({
       type: RETWEET_SUCCESS,
       data: result.data,
+    });
+    yield put({
+      type: CHANGE_RETWEET_COUNT,
+      data: result.data.id,
     });
   } catch (err) {
     yield put({
