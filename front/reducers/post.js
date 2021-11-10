@@ -244,7 +244,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
           originPost.RetweetTo.unshift({ id: instanceId });
           break;
         case 'REMOVE':
-          originPost.RetweetTo = originPost.RetweetTo.filter((id) => id !== instanceId);
+          originPost.RetweetTo = originPost.RetweetTo.filter((v) => v.id !== instanceId);
           break;
         default:
           break;
