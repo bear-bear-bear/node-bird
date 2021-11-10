@@ -270,10 +270,11 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
       content: 'retweet',
     });
 
-    await Post.update(
-      { RetweetTo: sequelize.fn('array_append', sequelize.col('RetweetTo'), retweet) },
+    const updatedPost = await Post.update(
+      { RetweetTo: sequelize.fn('CONCAT', sequelize.col('RetweetTo'), retweet) },
       { where: { id: retweetFromId } },
     );
+    console.log('updatedPost', updatedPost);
 
     const retweetWithPrevPost = await Post.findOne({
       where: { id: retweet.id },
