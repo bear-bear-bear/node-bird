@@ -37,6 +37,10 @@ const PostCard = ({ post }) => {
   const datetime = post.createdAt;
   const fromNow = moment(datetime).fromNow();
 
+  const postImages = post.Images[0] && post.Images;
+  const retweetImages = post.Retweet?.Images[0] && post.Retweet.Images;
+  const images = postImages || retweetImages;
+
   const isUser = () => (!!id);
 
   const onRetweet = useCallback(() => {
@@ -74,7 +78,7 @@ const PostCard = ({ post }) => {
   return (
     <S.CardWrapper>
       <Card
-        cover={post.Images[0] && <PostImages images={post.Images} />}
+        cover={images && <PostImages images={images} />}
         actions={[
           <RetweetOutlined key="retweet" onClick={onRetweet} />,
           liked
