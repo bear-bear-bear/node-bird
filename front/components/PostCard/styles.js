@@ -10,6 +10,10 @@ export const CardWrapper = styled.div`
   &:first-child {
     margin-top: 0.33rem;
   }
+
+  .ant-form-item {
+    margin: 0;
+  }
 `;
 
 export const IconWithCountWrapper = styled.section`
