@@ -190,15 +190,18 @@ function* removePost(action) {
     const result = yield call(removePostAPI, action.data);
     yield put({
       type: REMOVE_POST_SUCCESS,
-      data: result.data.id,
+      data: result.data,
     });
     yield put({
       type: REMOVE_POST_OF_ME,
-      data: result.data.id,
+      data: result.data,
     });
     yield put({
       type: CHANGE_RETWEET_COUNT,
-      data: result.data,
+      data: {
+        type: 'REMOVE',
+        post: result.data,
+      },
     });
   } catch (err) {
     yield put({
@@ -242,7 +245,10 @@ function* retweet(action) {
     });
     yield put({
       type: CHANGE_RETWEET_COUNT,
-      data: result.data.id,
+      data: {
+        type: 'ADD',
+        post: result.data,
+      },
     });
   } catch (err) {
     yield put({

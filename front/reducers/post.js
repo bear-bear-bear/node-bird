@@ -236,16 +236,14 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.retweetError = action.data;
       break;
     case CHANGE_RETWEET_COUNT: {
-      const post = action.data;
-      const { RetweetFromId: originId, id: instanceId } = post;
-      const changeType = draft.mainPosts.map((v) => v.id).includes(instanceId) ? 'ADDED' : 'REMOVED';
+      const { type, post: { RetweetFromId: originId, id: instanceId } } = action.data;
       const originPost = draft.mainPosts.find((v) => v.id === originId);
 
-      switch (changeType) {
-        case 'ADDED':
-          originPost.RetweetTo = originPost.RetweetTo.unshift({ id: instanceId });
+      switch (type) {
+        case 'ADD':
+          originPost.RetweetTo.unshift({ id: instanceId });
           break;
-        case 'REMOVED':
+        case 'REMOVE':
           originPost.RetweetTo = originPost.RetweetTo.filter((id) => id !== instanceId);
           break;
         default:
