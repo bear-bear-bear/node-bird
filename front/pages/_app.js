@@ -9,7 +9,7 @@ const App = ({ Component }) => (
   <>
     <Head>
       <meta charSet="utf-8" />
-      <title>sns clone</title>
+      <title>bearsns</title>
     </Head>
     <Component />
   </>

@@ -22,7 +22,7 @@ const Signup = () => {
   return (
     <AppLayout>
       <Head>
-        <title>회원가입 | sns-clone</title>
+        <title>회원가입 | bearsns</title>
       </Head>
       <SignupForm />
     </AppLayout>

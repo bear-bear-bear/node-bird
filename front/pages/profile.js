@@ -39,7 +39,7 @@ const Profile = () => {
   return (
     <>
       <Head>
-        <title>내 프로필 | sns-clone</title>
+        <title>내 프로필 | bearsns</title>
       </Head>
       <AppLayout>
         <NicknameEditForm />
