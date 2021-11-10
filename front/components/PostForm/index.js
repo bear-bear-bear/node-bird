@@ -20,14 +20,17 @@ const PostForm = () => {
 
   const onSubmit = useCallback(() => {
     if (!text || !text.trim()) {
-      return alert('빈 게시글은 제출할 수 없습니다.');
+      alert('빈 게시글은 제출할 수 없습니다.');
+      return;
     }
     const formData = new FormData();
     imagePaths.forEach((path) => {
       formData.append('image', path);
     });
     formData.append('content', text);
-    return dispatch({
+    console.log('imagePaths', imagePaths);
+    console.log('formdata image', formData.get('image'));
+    dispatch({
       type: ADD_POST_REQUEST,
       data: formData,
     });
