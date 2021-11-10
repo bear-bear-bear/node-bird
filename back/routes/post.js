@@ -253,11 +253,11 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
     }
 
     // 자신이 이미 게시글공유했던 게시물인지 검증
-    const retweetTargetId = post.Retweet?.id || post.id;
+    const retweetFromId = post.Retweet?.id || post.id;
     const exPost = await Post.findOne({
       where: {
         UserId,
-        RetweetTargetId: retweetTargetId,
+        RetweetFromId: retweetFromId,
       }
     });
     if (exPost) {
@@ -266,7 +266,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
 
     const retweet = await Post.create({
       UserId,
-      RetweetTargetId: retweetTargetId,
+      RetweetFromId: retweetFromId,
       content: 'retweet',
     });
     const retweetWithPrevPost = await Post.findOne({
