@@ -92,6 +92,7 @@ router.get('/:postId', async (req, res, next) => { // GET /post/:postId
 router.post('/', isLoggedIn, upload.none(), async (req, res, next) => { // POST /post
   try {
     const { image: imagePath, content } = req.body;
+    console.log('req.body', req.body);
     const { id: UserId } = req.user;
     const hashtags = content.match(/#[^\s#]+/g);
     const post = await Post.create({ content, UserId });
