@@ -257,9 +257,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
     const exPost = await Post.findOne({
       where: {
         UserId,
-        Retweet: {
-          id: retweetTargetId,
-        },
+        RetweetTargetId: retweetTargetId,
       }
     });
     if (exPost) {
@@ -268,6 +266,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
 
     const retweet = await Post.create({
       UserId,
+      RetweetTargetId: retweetTargetId,
       content: 'retweet',
     });
     const retweetWithPrevPost = await Post.findOne({
