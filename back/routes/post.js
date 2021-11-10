@@ -37,7 +37,7 @@ const upload = multer({
 
 // 이미지 업로드
 router.post('/images', upload.array('image'), (req, res, next) => { // POST /post/images
-  res.json(req.files.map((v) => v.location));
+  res.json(req.files.map((v) => v.location.replace(/\/original\//, '/thumb/')));
 });
 
 // 게시글 하나 가져오기
