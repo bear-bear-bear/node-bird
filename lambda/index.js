@@ -8,10 +8,10 @@ exports.handler = async (event, context, callback) => {
   const Bucket = event.Records[0].s3.bucket.name; // 'bearsns'
   const Key = decodeURIComponent(event.Records[0].s3.object.key); // original/example_abc.png
   const basename = path.basename(Key);
-  const extname = path.extname(Key).toLowerCase();
-  const requiredFormat = extname === 'jpg' ? 'jpeg' : extname;
+  const ext = basename.split('.').pop();
+  const requiredFormat = ext === 'jpg' ? 'jpeg' : ext;
 
-  console.log({ Bucket, Key, basename, extname, requiredFormat });
+  console.log({ Bucket, Key, basename, ext, requiredFormat });
 
   try {
     const s3Object = await s3.getObject({ Bucket, Key }).promise();
