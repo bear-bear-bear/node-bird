@@ -6,7 +6,7 @@ const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 
 
-const { Post, Image, Comment, User, Hashtag } = require('../models');
+const { Post, Image, Comment, User, Hashtag, sequelize } = require('../models');
 const { isLoggedIn } = require('../routes/middlewares');
 
 const router = express.Router();
@@ -269,6 +269,11 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
       RetweetFromId: retweetFromId,
       content: 'retweet',
     });
+    await Post.update(
+      { 'where': { id: retweetFromId } },
+      { RetweetTo: sequelize.fn('array_append', sequelize.col('RetweetTo'), retweet) }
+    );
+
     const retweetWithPrevPost = await Post.findOne({
       where: { id: retweet.id },
       include: [{

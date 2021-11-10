@@ -241,6 +241,10 @@ router.get('/:userId/posts', async (req, res, next) => { // GET /user/:userId/po
         }, {
           model: Image,
         }],
+      }, {
+        model: Post,
+        as: 'RetweetTo',
+        attributes: ['id'],
       }],
     });
     res.status(200).json(posts);
