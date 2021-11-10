@@ -17,7 +17,7 @@ const PostImages = ({ images }) => {
     setShowImagesZoom(false);
   }, []);
 
-  const sortedImages = images.sort((a, b) => a.id - b.id);
+  const sortedImages = [...images].sort((a, b) => a.id - b.id);
 
   if (sortedImages.length === 1) {
     return (
