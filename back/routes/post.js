@@ -56,14 +56,18 @@ router.get('/:postId', async (req, res, next) => { // GET /post/:postId
       where: { id: post.id },
       include: [{
         model: Post,
-        as: 'Retweet',
+        as: 'RetweetFrom',
         include: [{
           model: User,
           attributes: ['id', 'nickname'],
         }, {
           model: Image,
         }],
-      },{
+      }, {
+        model: Post,
+        as: 'RetweetTo',
+        attributes: ['id'],
+      }, {
         model: Image,
       }, {
         model: Comment,
@@ -232,7 +236,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
       where: { id: req.params.postId },
       include: [{
         model: Post,
-        as: 'Retweet',
+        as: 'RetweetFrom',
       }],
     });
 
@@ -249,11 +253,13 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
     }
 
     // 자신이 이미 게시글공유했던 게시물인지 검증
-    const retweetTargetId = post.RetweetId || post.id;
+    const retweetTargetId = post.Retweet?.id || post.id;
     const exPost = await Post.findOne({
       where: {
         UserId,
-        RetweetId: retweetTargetId,
+        Retweet: {
+          id: retweetTargetId,
+        },
       }
     });
     if (exPost) {
@@ -262,14 +268,13 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
 
     const retweet = await Post.create({
       UserId,
-      RetweetId: retweetTargetId,
       content: 'retweet',
     });
     const retweetWithPrevPost = await Post.findOne({
       where: { id: retweet.id },
       include: [{
         model: Post,
-        as: 'Retweet',
+        as: 'RetweetFrom',
         include: [{
           model: User,
           attributes: ['id', 'nickname'],

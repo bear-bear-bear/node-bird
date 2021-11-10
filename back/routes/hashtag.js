@@ -39,7 +39,7 @@ router.get('/:hashtag', async (req, res, next) => { // GET /hashtag/:hashtag
         attributes: ['id'],
       }, {
         model: Post,
-        as: 'Retweet',
+        as: 'RetweetFrom',
         include: [{
           model: User,
           attributes: ['id', 'nickname'],

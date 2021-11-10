@@ -36,13 +36,17 @@ router.get('/', async (req, res, next) => { // GET /posts
         attributes: ['id'],
       }, {
         model: Post,
-        as: 'Retweet',
+        as: 'RetweetFrom',
         include: [{
           model: User,
           attributes: ['id', 'nickname'],
         }, {
           model: Image,
         }],
+      }, {
+        model: Post,
+        as: 'RetweetTo',
+        attributes: ['id'],
       }],
     });
     res.status(200).json(posts);

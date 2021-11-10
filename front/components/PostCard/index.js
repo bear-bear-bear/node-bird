@@ -38,7 +38,7 @@ const PostCard = ({ post }) => {
   const fromNow = moment(datetime).fromNow();
 
   const postImages = post.Images[0] && post.Images;
-  const retweetImages = post.Retweet?.Images[0] && post.Retweet.Images;
+  const retweetImages = post.RetweetFrom?.Images[0] && post.RetweetFrom.Images;
   const images = postImages || retweetImages;
 
   const isUser = !!id;
@@ -83,7 +83,12 @@ const PostCard = ({ post }) => {
       <Card
         cover={images && <PostImages images={images} />}
         actions={[
-          <RetweetOutlined key="retweet" onClick={onRetweet} title="리트윗" />,
+          (
+            <S.IconWithCountWrapper>
+              <RetweetOutlined key="retweet" onClick={onRetweet} title="리트윗" />
+              <span>{post.retweetTo.length}</span>
+            </S.IconWithCountWrapper>
+          ),
           (
             <S.IconWithCountWrapper>
               {
@@ -126,21 +131,21 @@ const PostCard = ({ post }) => {
         ]}
         extra={id && <FollowButton post={post} />}
       >
-        {post.RetweetId && post.Retweet
+        {post.RetweetFromId && post.RetweetFrom
           ? (
             <Link href={`/post/${post.id}`}>
               <a>
                 <S.Time datetime={datetime}>{fromNow}</S.Time>
                 <Card.Meta
                   avatar={(
-                    <Link href={`/user/${post.Retweet.User.id}`}>
-                      <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
+                    <Link href={`/user/${post.RetweetFrom.User.id}`}>
+                      <a><Avatar>{post.RetweetFrom.User.nickname[0]}</Avatar></a>
                     </Link>
                       )}
-                  title={post.Retweet.User.nickname}
+                  title={post.RetweetFrom.User.nickname}
                   description={(
                     <PostCardContent
-                      postData={post.Retweet.content}
+                      postData={post.RetweetFrom.content}
                       retweetFrom={post.User.nickname}
                     />
                       )}
@@ -203,8 +208,8 @@ PostCard.propTypes = {
     Comments: PropTypes.arrayOf(PropTypes.object),
     Images: PropTypes.arrayOf(PropTypes.object),
     Likers: PropTypes.arrayOf(PropTypes.object),
-    RetweetId: PropTypes.number,
-    Retweet: PropTypes.objectOf(PropTypes.any),
+    RetweetFromId: PropTypes.number,
+    RetweetFrom: PropTypes.objectOf(PropTypes.any),
   }).isRequired,
 };
 
