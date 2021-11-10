@@ -239,6 +239,8 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       const { type, post: { RetweetFromId: originId, id: instanceId } } = action.data;
       const originPost = draft.mainPosts.find((v) => v.id === originId);
 
+      console.log('originPost', originPost);
+
       switch (type) {
         case 'ADD':
           originPost.RetweetTo.unshift({ id: instanceId });
@@ -249,8 +251,8 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         default:
           break;
       }
-    }
       break;
+    }
     default:
       break;
   }

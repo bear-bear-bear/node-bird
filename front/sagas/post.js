@@ -204,6 +204,7 @@ function* removePost(action) {
       },
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: REMOVE_POST_FAILURE,
       data: err.response?.data || null,
