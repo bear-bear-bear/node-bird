@@ -1,4 +1,4 @@
-import { all, fork, takeLatest, put, delay, throttle, call } from 'redux-saga/effects';
+import { all, fork, takeLatest, put, throttle, call } from 'redux-saga/effects';
 import axios from 'axios';
 import {
   LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE,
@@ -187,7 +187,6 @@ function removePostAPI(data) {
 function* removePost(action) {
   try {
     const result = yield call(removePostAPI, action.data);
-    yield delay(1000);
     yield put({
       type: REMOVE_POST_SUCCESS,
       data: result.data,
