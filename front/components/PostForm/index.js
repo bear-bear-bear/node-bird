@@ -72,9 +72,9 @@ const PostForm = () => {
         </S.FloatButton>
       </div>
       <div>
-        {imagePaths.map((v, i) => (
-          <S.ImagesWrap key={v}>
-            <img src={v} width={200} alt={v} />
+        {imagePaths.map((src, i) => (
+          <S.ImagesWrap key={src}>
+            <img src={src.replace(/\/thumb\//, '/original/')} width={200} alt={src} />
             <div>
               <Button onClick={onRemoveImage(i)}>제거</Button>
             </div>
