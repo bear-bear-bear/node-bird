@@ -23,13 +23,13 @@ const PostForm = () => {
       alert('빈 게시글은 제출할 수 없습니다.');
       return;
     }
+
     const formData = new FormData();
     imagePaths.forEach((path) => {
       formData.append('image', path);
     });
     formData.append('content', text);
-    console.log('imagePaths', imagePaths);
-    console.log('formdata image', formData.getAll('image'));
+
     dispatch({
       type: ADD_POST_REQUEST,
       data: formData,
@@ -53,7 +53,6 @@ const PostForm = () => {
   });
 
   const onRemoveImage = useCallback((index) => {
-    console.log('index', index);
     dispatch({
       type: REMOVE_IMAGE,
       data: index,
