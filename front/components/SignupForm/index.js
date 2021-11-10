@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from 'antd';
 
@@ -9,7 +9,7 @@ import * as S from './styles';
 
 const SignupForm = () => {
   const dispatch = useDispatch();
-  const { signUpLoading } = useSelector((state) => state.user);
+  const { signUpLoading, signUpDone } = useSelector((state) => state.user);
 
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
@@ -43,6 +43,12 @@ const SignupForm = () => {
       data: { email, nickname, password },
     });
   }, [password, passwordCheck, term]);
+
+  useEffect(() => {
+    if (signUpDone) {
+      alert('회원가입 완료');
+    }
+  }, [signUpDone]);
 
   return (
     <S.SignupForm onFinish={onSubmit}>
