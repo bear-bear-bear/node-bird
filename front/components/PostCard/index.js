@@ -90,11 +90,11 @@ const PostCard = ({ post }) => {
             </S.IconWithCountWrapper>
           ),
           (
-            <S.IconWithCountWrapper onClick={onUnlike}>
+            <S.IconWithCountWrapper onClick={liked ? onUnlike : onLike}>
               {
                 liked
                   ? <HeartTwoTone twoToneColor="#eb2f96" key="heart" title="좋아요 취소" />
-                  : <HeartOutlined key="heart" onClick={onLike} title="좋아요" />
+                  : <HeartOutlined key="heart" title="좋아요" />
               }
               <p>{post.Likers.length}</p>
             </S.IconWithCountWrapper>
