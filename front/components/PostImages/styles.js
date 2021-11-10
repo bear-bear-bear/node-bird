@@ -7,11 +7,17 @@ export const OneImageWrapper = styled.div`
 `;
 
 export const MoreWrapper = styled.div`
-  display: inline-block;
   width: 50%;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.66rem;
+  cursor: zoom-in;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const imageWidth = {
@@ -24,5 +30,5 @@ export const Image = styled.img`
   max-height: ${({ size }) => (size === 'auto' ? '60vh' : 'initial')};
   width: ${({ size }) => imageWidth[size] || '100%'};
   max-width: 100%;
-  cursor: pointer;
+  cursor: zoom-in;
 `;

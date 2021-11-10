@@ -41,7 +41,6 @@ const PostImages = ({ images }) => {
           <S.Image role="presentation" size="halfSize" src={images[0].src} alt={images[0].src} onClick={onZoom} />
           <S.MoreWrapper role="presentation" onClick={onZoom}>
             <PlusOutlined />
-            <br />
             <span>{images.length - 1}개의 사진 더 보기</span>
           </S.MoreWrapper>
         </div>
