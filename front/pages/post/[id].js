@@ -16,8 +16,7 @@ const Post = () => {
   const { id } = router.query;
   const { singlePost } = useSelector((state) => state.post);
 
-  console.log('Post', singlePost.Images);
-
+  if (!singlePost) return null;
   return (
     <AppLayout>
       <Head>
