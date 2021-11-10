@@ -32,8 +32,6 @@ const PostForm = () => {
       formData.append('content', text);
     })();
 
-    console.log('formData image', formData.getAll('image'));
-
     dispatch({
       type: ADD_POST_REQUEST,
       data: formData,
