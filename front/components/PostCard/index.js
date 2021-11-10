@@ -52,21 +52,21 @@ const PostCard = ({ post }) => {
       type: RETWEET_REQUEST,
       data: post.id,
     });
-  });
+  }, [isUser]);
   const onLike = useCallback(() => {
     if (!isUser) return;
     dispatch({
       type: LIKE_POST_REQUEST,
       data: post.id,
     });
-  }, []);
+  }, [isUser]);
   const onUnlike = useCallback(() => {
     if (!isUser) return;
     dispatch({
       type: UNLIKE_POST_REQUEST,
       data: post.id,
     });
-  }, []);
+  }, [isUser]);
   const onToggleComment = useCallback(() => {
     setCommentFormOpened((prev) => !prev);
   }, []);
@@ -76,7 +76,7 @@ const PostCard = ({ post }) => {
       type: REMOVE_POST_REQUEST,
       data: post.id,
     });
-  }, []);
+  }, [isUser]);
 
   return (
     <S.CardWrapper>
