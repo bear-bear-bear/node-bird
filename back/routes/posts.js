@@ -46,7 +46,6 @@ router.get('/', async (req, res, next) => { // GET /posts
       }, {
         model: Post,
         as: 'RetweetTo',
-        attributes: ['id'],
       }],
     });
     res.status(200).json(posts);
