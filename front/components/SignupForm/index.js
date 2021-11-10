@@ -11,19 +11,19 @@ const SignupForm = () => {
   const dispatch = useDispatch();
   const { signUpLoading, signUpDone } = useSelector((state) => state.user);
 
-  const [email, onChangeEmail] = useInput('');
-  const [nickname, onChangeNickname] = useInput('');
-  const [password, onChangePassword] = useInput('');
-
+  const [email, onChangeEmail, setEmail] = useInput('');
+  const [nickname, onChangeNickname, setNickname] = useInput('');
+  const [password, onChangePassword, setPassword] = useInput('');
   const [passwordCheck, setPasswordCheck] = useState('');
+  const [term, setTerm] = useState('');
   const [passwordError, setPasswordError] = useState(false);
+  const [termError, setTermError] = useState(false);
+
   const onChangePasswordCheck = useCallback((e) => {
     setPasswordCheck(e.target.value);
     setPasswordError(e.target.value !== password);
   }, [password]);
 
-  const [term, setTerm] = useState('');
-  const [termError, setTermError] = useState(false);
   const onChangeTerm = useCallback((e) => {
     setTerm(e.target.checked);
     setTermError(false);
@@ -47,6 +47,11 @@ const SignupForm = () => {
   useEffect(() => {
     if (signUpDone) {
       alert('회원가입 완료');
+
+      setTerm('');
+      setEmail('');
+      setNickname('');
+      setPassword('');
     }
   }, [signUpDone]);
 

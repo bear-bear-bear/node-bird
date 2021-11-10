@@ -86,7 +86,7 @@ const PostCard = ({ post }) => {
           (
             <S.IconWithCountWrapper>
               <RetweetOutlined key="retweet" onClick={onRetweet} title="리트윗" />
-              <span>{post.retweetTo.length}</span>
+              <span>{post.RetweetTo?.length || 0}</span>
             </S.IconWithCountWrapper>
           ),
           (
