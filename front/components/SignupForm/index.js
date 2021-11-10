@@ -52,6 +52,7 @@ const SignupForm = () => {
       setEmail('');
       setNickname('');
       setPassword('');
+      setPasswordCheck('');
     }
   }, [signUpDone]);
 
