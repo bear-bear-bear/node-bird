@@ -13,14 +13,34 @@ export const CardWrapper = styled.div`
 `;
 
 export const IconWithCountWrapper = styled.section`
-  & > .anticon:first-child {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+  & > .anticon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
     font-size: 16px;
     line-height: 22px;
     color: rgba(0, 0, 0, 0.45);
+    transition: all 50ms ease-in;
   }
 
-  & > :last-child {
-    padding-left: 0.33rem;
+  & > p {
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 1.33rem);
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover,
+  &:focus {
+    & > .anticon {
+      color: #1890ff;
+    }
   }
 `;
 
