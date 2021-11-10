@@ -191,7 +191,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.uploadImagesError = action.data;
       break;
     case REMOVE_IMAGE:
-      draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);
+      draft.imagePaths = draft.imagePaths.filter((_, i) => i !== action.data);
       break;
     case REMOVE_POST_REQUEST:
       draft.removePostLoading = true;

@@ -52,7 +52,8 @@ const PostForm = () => {
     });
   });
 
-  const onRemoveImage = useCallback((index) => () => {
+  const onRemoveImage = useCallback((index) => {
+    console.log('index', index);
     dispatch({
       type: REMOVE_IMAGE,
       data: index,
