@@ -272,8 +272,6 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
 
     const retweetedPost = await retweet.getRetweetFrom();
     const prevRetweetTo = (await retweetedPost.getRetweetTo()) || [];
-    console.log('prev retweetedPost', retweetedPost)
-    console.log('prevRetweetTo', prevRetweetTo)
     await retweetedPost.setRetweetTo([...prevRetweetTo, retweet]);
     console.log('next retweetedPost', retweetedPost)
 
