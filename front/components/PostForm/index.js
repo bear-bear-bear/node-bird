@@ -18,17 +18,19 @@ const PostForm = () => {
     }
   }, [addPostDone]);
 
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback(async () => {
     if (!text || !text.trim()) {
       alert('빈 게시글은 제출할 수 없습니다.');
       return;
     }
-
     const formData = new FormData();
-    imagePaths.forEach((path) => {
-      formData.append('image', path);
-    });
-    formData.append('content', text);
+
+    await (async () => {
+      imagePaths.forEach((path) => {
+        formData.append('image', path);
+      });
+      formData.append('content', text);
+    })();
 
     dispatch({
       type: ADD_POST_REQUEST,
