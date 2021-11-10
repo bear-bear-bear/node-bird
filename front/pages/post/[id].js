@@ -16,7 +16,22 @@ const Post = () => {
   const { id } = router.query;
   const { singlePost } = useSelector((state) => state.post);
 
-  if (!singlePost) return null;
+  if (!singlePost) {
+    return (
+      <AppLayout>
+        <section style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        >
+          <h1>존재하지 않거나 삭제된 게시글입니다.</h1>
+        </section>
+      </AppLayout>
+    );
+  }
   return (
     <AppLayout>
       <Head>
