@@ -186,13 +186,15 @@ router.delete('/:postId/like', isLoggedIn, async(req, res, next) => { // DELETE 
 router.delete('/:postId', isLoggedIn, async(req, res, next) => { // DELETE /post/:postId
   try {
     const { postId } = req.params;
-    const deletedPost = await Post.destroy({
+    const post = await Post.findOne({
       where: {
         id: postId,
         UserId: req.user.id,
       },
     });
-    res.status(200).json(deletedPost);
+    await post.destroy();
+
+    res.status(200).json(post);
   } catch (err) {
     console.error(err);
     next(err);
