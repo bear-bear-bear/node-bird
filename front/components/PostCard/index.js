@@ -41,24 +41,27 @@ const PostCard = ({ post }) => {
   const retweetImages = post.Retweet?.Images[0] && post.Retweet.Images;
   const images = postImages || retweetImages;
 
-  const isUser = () => (!!id);
+  const isUser = !!id;
 
   const onRetweet = useCallback(() => {
-    if (!isUser()) return;
+    if (!isUser) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
     dispatch({
       type: RETWEET_REQUEST,
       data: post.id,
     });
   });
   const onLike = useCallback(() => {
-    if (!isUser()) return;
+    if (!isUser) return;
     dispatch({
       type: LIKE_POST_REQUEST,
       data: post.id,
     });
   }, []);
   const onUnlike = useCallback(() => {
-    if (!isUser()) return;
+    if (!isUser) return;
     dispatch({
       type: UNLIKE_POST_REQUEST,
       data: post.id,
@@ -68,7 +71,7 @@ const PostCard = ({ post }) => {
     setCommentFormOpened((prev) => !prev);
   }, []);
   const onRemovePost = useCallback(() => {
-    if (!isUser()) return;
+    if (!isUser) return;
     dispatch({
       type: REMOVE_POST_REQUEST,
       data: post.id,
@@ -80,11 +83,23 @@ const PostCard = ({ post }) => {
       <Card
         cover={images && <PostImages images={images} />}
         actions={[
-          <RetweetOutlined key="retweet" onClick={onRetweet} />,
-          liked
-            ? <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onUnlike} />
-            : <HeartOutlined key="heart" onClick={onLike} />,
-          <MessageOutlined key="comment" onClick={onToggleComment} />,
+          <RetweetOutlined key="retweet" onClick={onRetweet} title="리트윗" />,
+          (
+            <S.IconWithCountWrapper>
+              {
+                liked
+                  ? <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onUnlike} title="좋아요 취소" />
+                  : <HeartOutlined key="heart" onClick={onLike} title="좋아요" />
+              }
+              <span>{post.Likers.length}</span>
+            </S.IconWithCountWrapper>
+          ),
+          (
+            <S.IconWithCountWrapper>
+              <MessageOutlined key="comment" onClick={onToggleComment} title="댓글" />
+              <span>{post.Comments.length}</span>
+            </S.IconWithCountWrapper>
+          ),
           <Popover
             key="more"
             content={(
