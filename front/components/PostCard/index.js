@@ -109,60 +109,64 @@ const PostCard = ({ post }) => {
       >
         {post.RetweetId && post.Retweet
           ? (
-            <>
-              <S.Time datetime={datetime}>{fromNow}</S.Time>
-              <Card.Meta
-                avatar={(
-                  <Link href={`/user/${post.Retweet.User.id}`}>
-                    <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
-                  </Link>
-              )}
-                title={post.Retweet.User.nickname}
-                description={(
-                  <PostCardContent
-                    postData={post.Retweet.content}
-                    retweetFrom={post.User.nickname}
-                  />
-              )}
-              />
-            </>
+            <Link href={`/post/${post.id}`}>
+              <a>
+                <S.Time datetime={datetime}>{fromNow}</S.Time>
+                <Card.Meta
+                  avatar={(
+                    <Link href={`/user/${post.Retweet.User.id}`}>
+                      <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
+                    </Link>
+                      )}
+                  title={post.Retweet.User.nickname}
+                  description={(
+                    <PostCardContent
+                      postData={post.Retweet.content}
+                      retweetFrom={post.User.nickname}
+                    />
+                      )}
+                />
+              </a>
+            </Link>
           ) : (
-            <>
-              <S.Time datetime={datetime}>{fromNow}</S.Time>
-              <Card.Meta
-                avatar={(
-                  <Link href={`/user/${post.User.id}`}>
-                    <a><Avatar>{post.User.nickname[0]}</Avatar></a>
-                  </Link>
-              )}
-                title={post.User.nickname}
-                description={<PostCardContent postData={post.content} />}
-              />
-            </>
+            <Link href={`/post/${post.id}`}>
+              <a>
+                <S.Time datetime={datetime}>{fromNow}</S.Time>
+                <Card.Meta
+                  avatar={(
+                    <Link href={`/user/${post.User.id}`}>
+                      <a><Avatar>{post.User.nickname[0]}</Avatar></a>
+                    </Link>
+                      )}
+                  title={post.User.nickname}
+                  description={<PostCardContent postData={post.content} />}
+                />
+              </a>
+            </Link>
           )}
       </Card>
       {commentFormOpened && (
-        <div>
-          <CommentForm post={post} />
-          <List
-            header={`${post.Comments.length}개의 댓글`}
-            itemLayout="horizontal"
-            dataSource={post.Comments}
-            renderItem={(item) => (
-              <li>
-                <Comment
-                  author={item.User.nickname}
-                  avatar={(
-                    <Link href={`/user/${item.User.id}`}>
-                      <a><Avatar>{item.User.nickname[0]}</Avatar></a>
-                    </Link>
+      <div>
+        <CommentForm post={post} />
+        <List
+          header={`${post.Comments.length}개의 댓글`}
+          itemLayout="horizontal"
+          dataSource={post.Comments}
+          renderItem={(item) => (
+            <li>
+              <Comment
+                author={item.User.nickname}
+                avatar={(
+                  <Link href={`/user/${item.User.id}`}>
+                    <a><Avatar>{item.User.nickname[0]}</Avatar></a>
+                  </Link>
                   )}
-                  content={item.content}
-                />
-              </li>
-            )}
-          />
-        </div>
+                content={item.content}
+              />
+            </li>
+          )}
+        />
+      </div>
       )}
     </S.CardWrapper>
   );
