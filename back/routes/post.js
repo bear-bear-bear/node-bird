@@ -246,7 +246,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
     const isRetweetOwnPost = UserId === post.UserId;
     const isRetweetOwnPostThatRetweeted = UserId === post.Retweet?.UserId;
     if(isRetweetOwnPost || isRetweetOwnPostThatRetweeted) {
-      return res.status(403).send('자신의 글은 게시글공유할 수 없습니다.');
+      return res.status(403).send('자신의 글은 공유할 수 없습니다.');
     }
 
     // 자신이 이미 게시글공유했던 게시물인지 검증
@@ -258,7 +258,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
       }
     });
     if (exPost) {
-      return res.status(403).send('이미 게시글공유한 글입니다');
+      return res.status(403).send('이미 공유한 글입니다');
     }
 
     const retweet = await Post.create({
