@@ -17,34 +17,36 @@ const PostImages = ({ images }) => {
     setShowImagesZoom(false);
   }, []);
 
-  if (images.length === 1) {
+  const sortedImages = images.sort((a, b) => a.id - b.id);
+
+  if (sortedImages.length === 1) {
     return (
       <S.OneImageWrapper>
-        <S.Image role="presentation" size="auto" src={images[0].src} alt={images[0].src} onClick={onZoom} />
-        {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
+        <S.Image role="presentation" size="auto" src={sortedImages[0].src} alt={sortedImages[0].src} onClick={onZoom} />
+        {showImagesZoom && <ImagesZoom images={sortedImages} onClose={onClose} />}
       </S.OneImageWrapper>
     );
   }
-  if (images.length === 2) {
+  if (sortedImages.length === 2) {
     return (
       <>
-        <S.Image role="presentation" size="halfSize" src={images[0].src} alt={images[0].src} onClick={onZoom} />
-        <S.Image role="presentation" size="halfSize" src={images[1].src} alt={images[1].src} onClick={onZoom} />
-        {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
+        <S.Image role="presentation" size="halfSize" src={sortedImages[0].src} alt={sortedImages[0].src} onClick={onZoom} />
+        <S.Image role="presentation" size="halfSize" src={sortedImages[1].src} alt={sortedImages[1].src} onClick={onZoom} />
+        {showImagesZoom && <ImagesZoom images={sortedImages} onClose={onClose} />}
       </>
     );
   }
-  if (images.length >= 3) {
+  if (sortedImages.length >= 3) {
     return (
       <>
         <div>
-          <S.Image role="presentation" size="halfSize" src={images[0].src} alt={images[0].src} onClick={onZoom} />
+          <S.Image role="presentation" size="halfSize" src={sortedImages[0].src} alt={sortedImages[0].src} onClick={onZoom} />
           <S.MoreWrapper role="presentation" onClick={onZoom}>
             <PlusOutlined />
-            <span>{images.length - 1}개의 사진 더 보기</span>
+            <span>{sortedImages.length - 1}개의 사진 더 보기</span>
           </S.MoreWrapper>
         </div>
-        {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
+        {showImagesZoom && <ImagesZoom images={sortedImages} onClose={onClose} />}
       </>
     );
   }
