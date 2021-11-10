@@ -29,7 +29,7 @@ const PostForm = () => {
     });
     formData.append('content', text);
     console.log('imagePaths', imagePaths);
-    console.log('formdata image', formData.get('image'));
+    console.log('formdata image', formData.getAll('image'));
     dispatch({
       type: ADD_POST_REQUEST,
       data: formData,
@@ -79,7 +79,7 @@ const PostForm = () => {
           <S.ImagesWrap key={src}>
             <img src={src.replace(/\/thumb\//, '/original/')} width={200} alt={src} />
             <div>
-              <Button onClick={onRemoveImage(i)}>제거</Button>
+              <Button onClick={() => onRemoveImage(i)}>제거</Button>
             </div>
           </S.ImagesWrap>
         ))}
