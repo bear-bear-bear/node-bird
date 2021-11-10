@@ -274,7 +274,8 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res) => { //  POST /post
     const updatedPost = await retweetedPost.update({
       RetweetTo: (retweetedPost.RetweetTo || []).concat(retweet)
     });
-    console.log('updatedPost', updatedPost);
+    console.log('typeof', typeof updatedPost);
+    console.dir(updatedPost);
 
     const retweetWithPrevPost = await Post.findOne({
       where: { id: retweet.id },
