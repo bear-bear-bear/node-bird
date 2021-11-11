@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(hpp());
   app.use(helmet());
   app.use(cors({
-    origin: ['http://bearsns.com'],
+    origin: ['https://bearsns.com'],
     credentials: true,
   }));
 } else {
@@ -64,5 +64,5 @@ app.use('/user', userRouter);
 app.use('/hashtag', hashtagRouter);
 
 app.listen(port, () => {
-  console.log(`server is listening: http://localhost:${port}`);
+  console.log(`server is listening: https://localhost:${port}`);
 });

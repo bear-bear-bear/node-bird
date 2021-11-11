@@ -24,7 +24,7 @@ const AppLayout = ({ children }) => {
   return (
     <>
       <Head>
-        <meta property="og:image" content="http://bearsns.com/favicon.ico" />
+        <meta property="og:image" content="https://bearsns.com/favicon.ico" />
       </Head>
       <div>
         <S.Global />

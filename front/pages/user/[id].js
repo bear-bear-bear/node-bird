@@ -48,8 +48,8 @@ const User = () => {
           <meta name="description" content={`${userInfo.nickname} 님의 게시글`} />
           <meta property="og:title" content={`${userInfo.nickname} 님의 게시글`} />
           <meta property="og:description" content={`${userInfo.nickname} 님의 게시글`} />
-          <meta property="og:image" content="http://bearsns.com/favicon.ico" />
-          <meta property="og:url" content={`http://bearsns.com/user/${id}`} />
+          <meta property="og:image" content="https://bearsns.com/favicon.ico" />
+          <meta property="og:url" content={`https://bearsns.com/user/${id}`} />
         </Head>
       )}
       {userInfo

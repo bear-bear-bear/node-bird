@@ -1,1 +1,1 @@
-export const BACK_URL = 'http://api.bearsns.com';
+export const BACK_URL = 'https://api.bearsns.com';
