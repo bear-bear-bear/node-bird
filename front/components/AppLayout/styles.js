@@ -13,6 +13,14 @@ export const Global = createGlobalStyle`
 
     &-head {
       order: -2;
+      min-height: initial !important;
+      padding: initial !important;
+    }
+
+    &-extra {
+      padding: initial !important;
+      float: initial !important;
+      margin-left: initial !important;
     }
 
     &-body {

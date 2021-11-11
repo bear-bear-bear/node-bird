@@ -129,7 +129,10 @@ const PostCard = ({ post }) => {
                     </Button>
                   </>
                 ) : (
-                  <Button>신고</Button>
+                  <>
+                    <FollowButton post={post} />
+                    <Button>신고</Button>
+                  </>
                 )}
               </Button.Group>
             )}
@@ -137,7 +140,6 @@ const PostCard = ({ post }) => {
             <EllipsisOutlined />
           </Popover>,
         ]}
-        extra={id && <FollowButton post={post} />}
       >
         {post.RetweetFromId && post.RetweetFrom
           ? (
