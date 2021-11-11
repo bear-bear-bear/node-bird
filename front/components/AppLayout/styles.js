@@ -7,6 +7,23 @@ export const Global = createGlobalStyle`
     margin: 0 auto;
   }
 
+  .ant-card {
+    display: flex;
+    flex-direction: column;
+
+    > .ant-card-body {
+      order: -1;
+    }
+
+    > .ant-card-cover {
+      padding: 0 2rem;
+    }
+
+    > .ant-card-actions {
+      padding: 0 2rem;
+    }
+  }
+
   .ant-menu {
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
