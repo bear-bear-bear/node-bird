@@ -13,11 +13,8 @@ export const MoreWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.66rem;
-  cursor: zoom-in;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.04);
 `;
 
 const imageWidth = {
@@ -30,5 +27,5 @@ export const Image = styled.img`
   max-height: ${({ size }) => (size === 'auto' ? '60vh' : 'initial')};
   width: ${({ size }) => imageWidth[size] || '100%'};
   max-width: 100%;
-  cursor: zoom-in;
+  cursor: pointer;
 `;
