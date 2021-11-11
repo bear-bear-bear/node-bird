@@ -39,16 +39,29 @@ export const Header = styled.header`
 
 export const CloseBtn = styled(CloseOutlined)`
   position: absolute;
-  top: 0;
-  right: 0;
-  padding: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 999;
+  padding: 0.5rem;
   line-height: 0.9;
   cursor: pointer;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 1.33rem;
+  font-weight: 700;
+  border-radius: 50%;
+  transition: transform 0.1s ease-in-out;
+  will-change: transform;
+
+  :hover,
+  :focus {
+    transform: scale(1.1);
+  }
 `;
 
 export const SlickWrapper = styled.div`
-  height: calc(100% - 3rem);
-  background: #090909;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
 `;
 
 export const ImageWrapper = styled.div`

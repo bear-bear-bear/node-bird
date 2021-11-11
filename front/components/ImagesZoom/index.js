@@ -10,10 +10,7 @@ const ImagesZoom = ({ images, onClose }) => {
   return (
     <S.Overlay>
       <S.Global />
-      <S.Header>
-        <h1>상세 이미지</h1>
-        <S.CloseBtn onClick={onClose}>X</S.CloseBtn>
-      </S.Header>
+      <S.CloseBtn onClick={onClose}>X</S.CloseBtn>
       <S.SlickWrapper>
         <div>
           <Slick
