@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Menu, Row, Col } from 'antd';
+import { Menu } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 
 import UserProfile from '../UserProfile';
@@ -20,14 +20,14 @@ const AppLayout = ({ children }) => {
   const onSearch = useCallback(() => {
     Router.push(`/hashtag/${searchInput}`);
   }, [searchInput]);
-
+  // {children}
   return (
     <>
       <Head>
         <meta property="og:image" content="https://bearsns.com/favicon.ico" />
       </Head>
-      <div>
-        <S.Global />
+      <S.Global />
+      <S.Header>
         <Menu mode="horizontal">
           <Menu.Item>
             <Link href="/">
@@ -57,28 +57,31 @@ const AppLayout = ({ children }) => {
             </Menu.Item>
           )}
         </Menu>
-        <Row gutter={8}>
-          <Col xs={24} md={6}>
-            {me ? <UserProfile /> : <LoginForm />}
-          </Col>
-          <Col xs={24} md={12}>
-            {children}
-          </Col>
-          <Col xs={24} md={6}>
-            <S.Anchor
-              href="https://github.com/bear-bear-bear"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Made by
-              <S.IconWrapper>
-                <GithubOutlined />
-              </S.IconWrapper>
-              bear-bear-bear
-            </S.Anchor>
-          </Col>
-        </Row>
-      </div>
+      </S.Header>
+      <S.Sidebar>
+        <section>
+          {me ? <UserProfile /> : <LoginForm />}
+        </section>
+        <section>
+          {/* 빈 공간 */}
+        </section>
+        <section>
+          <S.Anchor
+            href="https://github.com/bear-bear-bear"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <S.MadebyWrapper>
+              Made by <S.IconWrapper><GithubOutlined /></S.IconWrapper> bear-bear-bear
+            </S.MadebyWrapper>
+          </S.Anchor>
+        </section>
+      </S.Sidebar>
+      <S.Main>
+        <section>{/* 빈 공간 */}</section>
+        <section>{children}</section>
+        <section>{/* 빈 공간 */}</section>
+      </S.Main>
     </>
   );
 };
