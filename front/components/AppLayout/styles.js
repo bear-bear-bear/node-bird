@@ -24,3 +24,14 @@ export const IconWrapper = styled.span`
   margin-left: 0.2rem;
   margin-right: 0.2rem;
 `;
+
+export const Logo = styled.article`
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+
+  & > span {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+`;

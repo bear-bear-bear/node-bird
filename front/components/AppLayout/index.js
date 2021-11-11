@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import Image from 'next/image';
 import Head from 'next/head';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
@@ -31,7 +32,15 @@ const AppLayout = ({ children }) => {
         <Menu mode="horizontal">
           <Menu.Item>
             <Link href="/">
-              <a href="home">bearsns</a>
+              <S.Logo>
+                <Image
+                  alt="favicon"
+                  src="/favicon.ico"
+                  width={16}
+                  height={16}
+                />
+                <span>bearsns</span>
+              </S.Logo>
             </Link>
           </Menu.Item>
           <Menu.Item>
