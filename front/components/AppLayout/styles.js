@@ -56,6 +56,23 @@ export const Global = createGlobalStyle`
     }
   }
 
+  .ant-form-item {
+    margin-bottom: initial;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .ant-list {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: -1rem;
+  }
+
+  .ant-list-items {
+    border-bottom: 5px double #eee;
+    margin-bottom: 2rem;
+  }
+
   .ant-menu {
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
