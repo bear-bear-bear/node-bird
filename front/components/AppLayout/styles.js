@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle, css } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Input } from 'antd';
 
 export const Global = createGlobalStyle`
@@ -37,6 +37,7 @@ export const Header = styled.header`
   position: sticky;
   top: 0;
   background-color: #fff;
+  z-index: 1;
 
   .ant-menu {
     height: ${HEADER_HEIGHT};
@@ -45,35 +46,30 @@ export const Header = styled.header`
   }
 `;
 
-const gridStyles = () => css`
+export const Container = styled.section`
+  position: relative;
   width: 100%;
   max-width: 1280px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 
+  aside {
+    position: sticky;
+    top: ${HEADER_HEIGHT};
+    align-self: start;
+  }
+
   @media screen and (max-width: ${MEDIA_BREAK_POINT}) {
     grid-template-columns: initial;
     display: flex;
     flex-direction: column;
+
+    aside {
+      position: static;
+      top: initial;
+      align-self: initial;
+    }
   }
-`;
-
-export const Sidebar = styled.section`
-  position: fixed;
-  top: ${HEADER_HEIGHT};
-
-  ${gridStyles}
-  @media screen and (max-width: ${MEDIA_BREAK_POINT}) {
-    position: sticky;
-    background-color: #fff;
-  }
-`;
-
-export const Main = styled.main`
-  position: relative;
-  z-index: -1;
-
-  ${gridStyles}
 `;
 
 export const SearchInput = styled(Input.Search)`

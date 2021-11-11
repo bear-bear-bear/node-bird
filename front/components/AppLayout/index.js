@@ -58,14 +58,12 @@ const AppLayout = ({ children }) => {
           )}
         </Menu>
       </S.Header>
-      <S.Sidebar>
-        <section>
+      <S.Container>
+        <aside>
           {me ? <UserProfile /> : <LoginForm />}
-        </section>
-        <section>
-          {/* 빈 공간 */}
-        </section>
-        <section>
+        </aside>
+        <main>{children}</main>
+        <aside>
           <S.Anchor
             href="https://github.com/bear-bear-bear"
             target="_blank"
@@ -75,13 +73,8 @@ const AppLayout = ({ children }) => {
               Made by <S.IconWrapper><GithubOutlined /></S.IconWrapper> bear-bear-bear
             </S.MadebyWrapper>
           </S.Anchor>
-        </section>
-      </S.Sidebar>
-      <S.Main>
-        <section>{/* 빈 공간 */}</section>
-        <section>{children}</section>
-        <section>{/* 빈 공간 */}</section>
-      </S.Main>
+        </aside>
+      </S.Container>
     </>
   );
 };
