@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-export const OneImageWrapper = styled.div`
+export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   cursor: pointer;
 `;
 
 export const MoreWrapper = styled.div`
-  width: 50%;
-  height: 100%;
+  flex: 1;
   display: inline-flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 0.66rem;
   cursor: zoom-in;

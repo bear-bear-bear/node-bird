@@ -21,17 +21,21 @@ const PostImages = ({ images }) => {
 
   if (sortedImages.length === 1) {
     return (
-      <S.OneImageWrapper>
-        <S.Image role="presentation" size="auto" src={sortedImages[0].src} alt={sortedImages[0].src} onClick={onZoom} />
+      <>
+        <S.ImageWrapper>
+          <S.Image role="presentation" size="auto" src={sortedImages[0].src} alt={sortedImages[0].src} onClick={onZoom} />
+        </S.ImageWrapper>
         {showImagesZoom && <ImagesZoom images={sortedImages} onClose={onClose} />}
-      </S.OneImageWrapper>
+      </>
     );
   }
   if (sortedImages.length === 2) {
     return (
       <>
-        <S.Image role="presentation" size="halfSize" src={sortedImages[0].src} alt={sortedImages[0].src} onClick={onZoom} />
-        <S.Image role="presentation" size="halfSize" src={sortedImages[1].src} alt={sortedImages[1].src} onClick={onZoom} />
+        <S.ImageWrapper>
+          <S.Image role="presentation" size="halfSize" src={sortedImages[0].src} alt={sortedImages[0].src} onClick={onZoom} />
+          <S.Image role="presentation" size="halfSize" src={sortedImages[1].src} alt={sortedImages[1].src} onClick={onZoom} />
+        </S.ImageWrapper>
         {showImagesZoom && <ImagesZoom images={sortedImages} onClose={onClose} />}
       </>
     );
@@ -39,13 +43,13 @@ const PostImages = ({ images }) => {
   if (sortedImages.length >= 3) {
     return (
       <>
-        <div>
+        <S.ImageWrapper>
           <S.Image role="presentation" size="halfSize" src={sortedImages[0].src} alt={sortedImages[0].src} onClick={onZoom} />
           <S.MoreWrapper role="presentation" onClick={onZoom}>
             <PlusOutlined />
             <span>{sortedImages.length - 1}개의 사진 더 보기</span>
           </S.MoreWrapper>
-        </div>
+        </S.ImageWrapper>
         {showImagesZoom && <ImagesZoom images={sortedImages} onClose={onClose} />}
       </>
     );
