@@ -11,6 +11,10 @@ export const Global = createGlobalStyle`
     display: flex;
     flex-direction: column;
 
+    &-head {
+      order: -2;
+    }
+
     &-body {
       order: -1;
     }
