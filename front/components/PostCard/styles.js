@@ -1,18 +1,40 @@
 import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
-  box-shadow: 0 0 1px #f2f2f2,
-                    0 0 2px #f2f2f2,
-                    0 0 4px #f2f2f2,
-                    0 0 10px #f2f2f2;
-  margin-bottom: 1.33rem;
+  position: relative;
+  padding-top: ${({ isRetweeted }) => (isRetweeted ? '0.66rem' : 0)};
+  border: 1px solid #f0f0f0;
 
-  &:first-child {
-    margin-top: 0.33rem;
+  &:not(:last-child) {
+    border-bottom: none;
   }
+
+  ::hover
 
   .ant-form-item {
     margin: 0;
+  }
+`;
+
+export const RetweetText = styled.p`
+  position: absolute;
+  top: 0.2rem;
+  left: 2.33rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0 !important;
+  
+  & > span {
+    letter-spacing: 0.01rem;
+    font-size: 0.75rem;
+    color: #777;
+    font-weight: bold;
+  }
+  
+  & > span:first-child { // 아이콘
+    font-size: 1.15rem;
+    margin-right: 0.33rem;
   }
 `;
 

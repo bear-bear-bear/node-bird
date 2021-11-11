@@ -1,11 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { RetweetOutlined } from '@ant-design/icons';
 
-import * as S from './styles';
-
-const PostCardContent = ({ postData, retweetFrom }) => (
+const PostCardContent = ({ postData }) => (
   <div>
     {postData.split(/(#[^\s#]+)/g).map((v, i) => {
       if (v.match(/(#[^\s#]+)/)) {
@@ -18,22 +15,11 @@ const PostCardContent = ({ postData, retweetFrom }) => (
       }
       return v;
     })}
-    {retweetFrom && (
-      <S.RetweetText>
-        <span><RetweetOutlined /></span>
-        <span>{retweetFrom} <b>Retweeted</b></span>
-      </S.RetweetText>
-    )}
   </div>
 );
 
-PostCardContent.defaultProps = {
-  retweetFrom: null,
-};
-
 PostCardContent.propTypes = {
   postData: PropTypes.string.isRequired,
-  retweetFrom: PropTypes.string,
 };
 
 export default PostCardContent;

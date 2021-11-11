@@ -10,6 +10,7 @@ import {
   MessageOutlined,
   EllipsisOutlined,
 } from '@ant-design/icons';
+
 import moment from 'moment';
 
 import PostImages from '../PostImages';
@@ -79,8 +80,15 @@ const PostCard = ({ post }) => {
   }, [isUser]);
 
   return (
-    <S.CardWrapper>
+    <S.CardWrapper isRetweeted={!!post.RetweetFrom}>
+      {post.RetweetFrom && (
+        <S.RetweetText>
+          <span><RetweetOutlined /></span>
+          <span><b>{post.User.nickname} 님이 리트윗함</b></span>
+        </S.RetweetText>
+      )}
       <Card
+        bordered={false}
         cover={images && <PostImages images={images} />}
         actions={[
           (
@@ -143,12 +151,7 @@ const PostCard = ({ post }) => {
                     </Link>
                       )}
                   title={post.RetweetFrom.User.nickname}
-                  description={(
-                    <PostCardContent
-                      postData={post.RetweetFrom.content}
-                      retweetFrom={post.User.nickname}
-                    />
-                      )}
+                  description={(<PostCardContent postData={post.RetweetFrom.content} />)}
                 />
               </a>
             </Link>

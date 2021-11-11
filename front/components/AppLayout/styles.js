@@ -11,16 +11,31 @@ export const Global = createGlobalStyle`
     display: flex;
     flex-direction: column;
 
-    > .ant-card-body {
+    &-body {
       order: -1;
     }
 
-    > .ant-card-cover {
-      padding: 0 2rem;
+    &-cover {
+      padding-left: 4.5rem;
+      padding-right: 2rem;
     }
 
-    > .ant-card-actions {
-      padding: 0 2rem;
+    &-actions {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    &-meta-title {
+      font-weight: bold;
+      margin-bottom: 0.1rem;
+    }
+
+    .ant-avatar-circle {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
     }
   }
 
@@ -54,7 +69,7 @@ export const Header = styled.header`
   position: sticky;
   top: 0;
   background-color: #fff;
-  z-index: 1;
+  z-index: 999;
 
   .ant-menu {
     height: ${HEADER_HEIGHT};
@@ -85,6 +100,10 @@ export const Container = styled.section`
       position: static;
       top: initial;
       align-self: initial;
+    }
+
+    main {
+      order: 1;
     }
   }
 `;
