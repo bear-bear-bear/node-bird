@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
-  box-shadow: 0 0 1px #fcfcfc,
-                    0 0 2px #fcfcfc,
-                    0 0 4px #fcfcfc,
-                    0 0 10px #fcfcfc;
+  box-shadow: 0 0 1px #f2f2f2,
+                    0 0 2px #f2f2f2,
+                    0 0 4px #f2f2f2,
+                    0 0 10px #f2f2f2;
   margin-bottom: 1.33rem;
 
   &:first-child {

@@ -2,6 +2,11 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { Input } from 'antd';
 
 export const Global = createGlobalStyle`
+  .ant-menu {
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+  }
+
   .ant-row {
       margin-right: 0 !important;
       margin-left: 0 !important;
@@ -14,9 +19,14 @@ export const Global = createGlobalStyle`
   .ant-col:last-child {
       padding-right: 0 !important;
   }
+
+  .anticon {
+    margin-right: 0 !important;
+  }
 `;
 
 export const SearchInput = styled(Input.Search)`
+  width: 18rem;
   vertical-align: middle;
 `;
 
@@ -25,13 +35,6 @@ export const IconWrapper = styled.span`
   margin-right: 0.2rem;
 `;
 
-export const Logo = styled.article`
-  display: flex;
-  align-items: center;
-  gap: 0.1rem;
-
-  & > span {
-    font-size: 1.05rem;
-    font-weight: 600;
-  }
+export const Anchor = styled.a`
+  font-weight: 500;
 `;

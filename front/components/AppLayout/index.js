@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import Image from 'next/image';
 import Head from 'next/head';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
@@ -32,19 +31,12 @@ const AppLayout = ({ children }) => {
         <Menu mode="horizontal">
           <Menu.Item>
             <Link href="/">
-              <S.Logo>
-                <Image
-                  alt="favicon"
-                  src="/favicon.ico"
-                  width={16}
-                  height={16}
-                />
-                <span>bearsns</span>
-              </S.Logo>
+              <a><img src="/logo.jpg" alt="로고" width={48} height={48} /></a>
             </Link>
           </Menu.Item>
           <Menu.Item>
             <S.SearchInput
+              size="large"
               enterButton
               value={searchInput}
               onChange={onChangeSearchInput}
@@ -54,13 +46,13 @@ const AppLayout = ({ children }) => {
           { me ? (
             <Menu.Item>
               <Link href="/profile">
-                <a href="profile">프로필</a>
+                <S.Anchor>프로필</S.Anchor>
               </Link>
             </Menu.Item>
           ) : (
             <Menu.Item>
               <Link href="/signup">
-                <a href="signup">회원가입</a>
+                <S.Anchor>회원가입</S.Anchor>
               </Link>
             </Menu.Item>
           )}
@@ -73,7 +65,7 @@ const AppLayout = ({ children }) => {
             {children}
           </Col>
           <Col xs={24} md={6}>
-            <a
+            <S.Anchor
               href="https://github.com/bear-bear-bear"
               target="_blank"
               rel="noopener noreferrer"
@@ -83,7 +75,7 @@ const AppLayout = ({ children }) => {
                 <GithubOutlined />
               </S.IconWrapper>
               bear-bear-bear
-            </a>
+            </S.Anchor>
           </Col>
         </Row>
       </div>

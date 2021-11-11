@@ -24,6 +24,7 @@ const LoginForm = () => {
         <label htmlFor="user-email">이메일</label>
         <br />
         <Input
+          size="large"
           name="user-email"
           type="email"
           value={email}
@@ -35,6 +36,7 @@ const LoginForm = () => {
         <label htmlFor="user-password">비밀번호</label>
         <br />
         <Input
+          size="large"
           name="user-password"
           type="password"
           value={password}
@@ -43,11 +45,11 @@ const LoginForm = () => {
         />
       </div>
       <S.ButtonWrapper>
-        <Button type="primary" htmlType="submit" loading={logInLoading}>
+        <Button size="large" type="primary" htmlType="submit" loading={logInLoading}>
           로그인
         </Button>
         <Link href="/signup">
-          <a href="signup"><Button>회원가입</Button></a>
+          <a href="signup"><Button size="large">회원가입</Button></a>
         </Link>
       </S.ButtonWrapper>
     </S.LoginForm>
