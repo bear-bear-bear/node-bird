@@ -36,6 +36,11 @@ export const Global = createGlobalStyle`
       align-items: center;
       width: 48px;
       height: 48px;
+
+      .ant-avatar-string {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
     }
   }
 
