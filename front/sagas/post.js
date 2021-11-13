@@ -1,4 +1,4 @@
-import { all, fork, takeLatest, put, throttle, call } from 'redux-saga/effects';
+import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
 import {
   LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE,
@@ -268,15 +268,15 @@ function* watchUnlikePost() {
 }
 
 function* watchLoadUserPosts() {
-  yield throttle(5000, LOAD_USER_POSTS_REQUEST, loadUserPosts);
+  yield takeLatest(LOAD_USER_POSTS_REQUEST, loadUserPosts);
 }
 
 function* watchLoadHashtagPosts() {
-  yield throttle(5000, LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts);
+  yield takeLatest(LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts);
 }
 
 function* watchLoadPosts() {
-  yield throttle(5000, LOAD_POSTS_REQUEST, loadPosts);
+  yield takeLatest(LOAD_POSTS_REQUEST, loadPosts);
 }
 
 function* watchLoadPost() {
