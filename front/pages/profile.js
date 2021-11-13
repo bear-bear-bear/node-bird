@@ -30,11 +30,14 @@ const Profile = () => {
       type: LOAD_FOLLOWERS_REQUEST,
       data: followersLimit,
     });
+  }, [followersLimit]);
+
+  useEffect(() => {
     dispatch({
       type: LOAD_FOLLOWINGS_REQUEST,
       data: followingsLimit,
     });
-  }, []);
+  }, [followingsLimit]);
 
   return (
     <>
@@ -43,18 +46,22 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NicknameEditForm />
-        <FollowList
-          header="팔로잉 목록"
-          data={me?.Followings}
-          onClickMore={() => loadMoreData(setFollowingsLimit)}
-          loading={loadFollowingsLoading}
-        />
-        <FollowList
-          header="팔로워 목록"
-          data={me?.Followers}
-          onClickMore={() => loadMoreData(setFollowersLimit)}
-          loading={loadFollowersLoading}
-        />
+        {me && (
+          <>
+            <FollowList
+              header="팔로잉 목록"
+              data={me.Followings}
+              onClickMore={() => loadMoreData(setFollowingsLimit)}
+              loading={loadFollowingsLoading}
+            />
+            <FollowList
+              header="팔로워 목록"
+              data={me.Followers}
+              onClickMore={() => loadMoreData(setFollowersLimit)}
+              loading={loadFollowersLoading}
+            />
+          </>
+        )}
       </AppLayout>
     </>
   );
