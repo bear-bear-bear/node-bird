@@ -57,6 +57,11 @@ export const Global = createGlobalStyle`
   }
 
   .ant-form-item {
+    position: relative;
+    z-index: 3;
+  }
+
+  .ant-form-item {
     margin-bottom: initial;
     padding-left: 2rem;
     padding-right: 2rem;
