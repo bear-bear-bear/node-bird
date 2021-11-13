@@ -18,9 +18,12 @@ const AppLayout = ({ children }) => {
   const [searchInput, onChangeSearchInput] = useInput('');
 
   const onSearch = useCallback(() => {
-    Router.push(`/hashtag/${searchInput}`);
+    const filteredHashtag = searchInput.replace(/[#\s]/g, '');
+    if (filteredHashtag === '') return;
+
+    Router.push(`/hashtag/${filteredHashtag}`);
   }, [searchInput]);
-  // {children}
+
   return (
     <>
       <Head>
@@ -41,6 +44,7 @@ const AppLayout = ({ children }) => {
               value={searchInput}
               onChange={onChangeSearchInput}
               onSearch={onSearch}
+              placeholder="해쉬태그 검색"
             />
           </Menu.Item>
           { me ? (

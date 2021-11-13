@@ -37,9 +37,15 @@ const Hashtag = () => {
 
   return (
     <AppLayout>
-      {mainPosts.map((c) => (
-        <PostCard key={c.id} post={c} />
-      ))}
+      {mainPosts.length === 0
+        ? (
+          <h1 style={{ textAlign: 'center', padding: '3rem 0', fontWeight: 700 }}>{`'${tag}'에 대한 검색결과 없음`}</h1>
+        )
+        : (
+          mainPosts.map((c) => (
+            <PostCard key={c.id} post={c} />
+          ))
+        )}
     </AppLayout>
   );
 };
