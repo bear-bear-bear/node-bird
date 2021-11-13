@@ -20,11 +20,15 @@ const getFullUserWithoutPassword = async (user) => {
     }, {
       model: User,
       as: 'Followings',
-      attributes: ['id'],
+      attributes: {
+        exclude: ['password'],
+      },
     }, {
       model: User,
       as: 'Followers',
-      attributes: ['id'],
+      attributes: {
+        exclude: ['password'],
+      },
     }]
   });
   return fullUserWithoutPassword;
