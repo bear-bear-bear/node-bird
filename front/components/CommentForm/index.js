@@ -34,7 +34,12 @@ const CommentForm = ({ post }) => {
   return (
     <Form onFinish={onSubmitComment}>
       <Form.Item>
-        <Input.TextArea value={commentText} onChange={onChangeCommentText} rows={4} />
+        <Input.TextArea
+          value={commentText}
+          onChange={onChangeCommentText}
+          rows={4}
+          maxlength={140}
+        />
         <S.CustomButton type="primary" htmlType="submit" loading={addCommentLoading}>댓글달기</S.CustomButton>
       </Form.Item>
     </Form>

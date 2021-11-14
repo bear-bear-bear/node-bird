@@ -42,6 +42,10 @@ export const Global = createGlobalStyle`
       margin-bottom: 0.1rem;
     }
 
+    &-meta-description > div {
+      overflow-wrap: break-word;
+    }
+
     .ant-avatar-circle {
       display: inline-flex;
       justify-content: center;
@@ -117,10 +121,11 @@ export const Header = styled.header`
   }
 `;
 
+const CONTAINER_MAX_WIDTH = '1280px';
 export const Container = styled.section`
   position: relative;
   width: 100%;
-  max-width: 1280px;
+  max-width: ${CONTAINER_MAX_WIDTH};
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 
@@ -128,6 +133,21 @@ export const Container = styled.section`
     position: sticky;
     top: ${HEADER_HEIGHT};
     align-self: start;
+  }
+
+  // antd description이 'div' 엘리먼트라 text wrap을 설정하지 못하여 overflow가 발생하는데,
+  // 최소한 overflow-wrap: break-word; 라도 설정해놓고 이렇게 main max-width를 맞춰줘야
+  // overflow를 막을 수 있음
+  @media screen and (min-width: ${CONTAINER_MAX_WIDTH}) {
+    main {
+      max-width: calc(${CONTAINER_MAX_WIDTH} / 2);
+    }
+  }
+
+  @media screen and (max-width: ${CONTAINER_MAX_WIDTH}) {
+    main {
+      max-width: calc(100vw / 2);
+    }
   }
 
   @media screen and (max-width: ${MEDIA_BREAK_POINT}) {
@@ -142,6 +162,7 @@ export const Container = styled.section`
     }
 
     main {
+      max-width: initial;
       order: 1;
     }
   }
