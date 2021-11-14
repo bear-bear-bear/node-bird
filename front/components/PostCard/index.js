@@ -143,35 +143,31 @@ const PostCard = ({ post }) => {
       >
         {post.RetweetFromId && post.RetweetFrom
           ? (
-            <Link href={`/post/${post.id}`}>
-              <a>
-                <S.Time datetime={datetime}>{fromNow}</S.Time>
-                <Card.Meta
-                  avatar={(
-                    <Link href={`/user/${post.RetweetFrom.User.id}`}>
-                      <a><Avatar>{post.RetweetFrom.User.nickname[0]}</Avatar></a>
-                    </Link>
+            <>
+              <S.Time datetime={datetime}>{fromNow}</S.Time>
+              <Card.Meta
+                avatar={(
+                  <Link href={`/user/${post.RetweetFrom.User.id}`}>
+                    <a><Avatar>{post.RetweetFrom.User.nickname[0]}</Avatar></a>
+                  </Link>
                       )}
-                  title={post.RetweetFrom.User.nickname}
-                  description={(<PostCardContent postData={post.RetweetFrom.content} />)}
-                />
-              </a>
-            </Link>
+                title={post.RetweetFrom.User.nickname}
+                description={(<PostCardContent postData={post.RetweetFrom.content} />)}
+              />
+            </>
           ) : (
-            <Link href={`/post/${post.id}`}>
-              <a>
-                <S.Time datetime={datetime}>{fromNow}</S.Time>
-                <Card.Meta
-                  avatar={(
-                    <Link href={`/user/${post.User.id}`}>
-                      <a><Avatar>{post.User.nickname[0]}</Avatar></a>
-                    </Link>
+            <>
+              <S.Time datetime={datetime}>{fromNow}</S.Time>
+              <Card.Meta
+                avatar={(
+                  <Link href={`/user/${post.User.id}`}>
+                    <a><Avatar>{post.User.nickname[0]}</Avatar></a>
+                  </Link>
                       )}
-                  title={post.User.nickname}
-                  description={<PostCardContent postData={post.content} />}
-                />
-              </a>
-            </Link>
+                title={post.User.nickname}
+                description={<PostCardContent postData={post.content} />}
+              />
+            </>
           )}
       </Card>
       {commentFormOpened && (
