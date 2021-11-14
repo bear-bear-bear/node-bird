@@ -119,7 +119,7 @@ const PostCard = ({ post }) => {
               <Button.Group>
                 {id && id === post.User.id ? (
                   <>
-                    <Button>수정</Button>
+                    <Button type="primary">수정</Button>
                     <Button
                       type="danger"
                       onClick={onRemovePost}
@@ -131,7 +131,7 @@ const PostCard = ({ post }) => {
                 ) : (
                   <>
                     <FollowButton post={post} />
-                    <Button>신고</Button>
+                    <Button type="danger">신고</Button>
                   </>
                 )}
               </Button.Group>
