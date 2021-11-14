@@ -119,7 +119,9 @@ const PostCard = ({ post }) => {
               <Button.Group>
                 {id && id === post.User.id ? (
                   <>
-                    <Button type="primary">수정</Button>
+                    {post.RetweetFromId && post.RetweetFrom && (
+                      <Button type="primary">수정</Button>
+                    )}
                     <Button
                       type="danger"
                       onClick={onRemovePost}
