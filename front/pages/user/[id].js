@@ -58,7 +58,7 @@ const User = () => {
             style={{ marginBottom: '1.5rem' }}
             actions={[
               <div key="twit">
-                짹짹
+                올린 글
                 <br />
                 {userInfo.Posts}
               </div>,
