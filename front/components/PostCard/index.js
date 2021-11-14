@@ -43,6 +43,7 @@ const PostCard = ({ post }) => {
   const images = postImages || retweetImages;
 
   const isUser = !!id;
+  const isRetweeted = post.RetweetFromId && post.RetweetFrom;
 
   const onRetweet = useCallback(() => {
     if (!isUser) {
@@ -119,8 +120,13 @@ const PostCard = ({ post }) => {
               <Button.Group>
                 {id && id === post.User.id ? (
                   <>
-                    {post.RetweetFromId && post.RetweetFrom && (
-                      <Button type="primary">수정</Button>
+                    {!isRetweeted && (
+                      <Button
+                        type="primary"
+                        // onClick={onEditPost}
+                      >
+                        수정
+                      </Button>
                     )}
                     <Button
                       type="danger"
@@ -143,7 +149,7 @@ const PostCard = ({ post }) => {
           </Popover>,
         ]}
       >
-        {post.RetweetFromId && post.RetweetFrom
+        {isRetweeted
           ? (
             <>
               <S.Time datetime={datetime}>{fromNow}</S.Time>
