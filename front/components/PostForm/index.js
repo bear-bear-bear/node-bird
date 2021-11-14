@@ -1,16 +1,22 @@
-import React, { useCallback, useRef, useEffect } from 'react';
+import React, { useCallback, useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button } from 'antd';
 
 import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../../reducers/post';
-import useInput from '../../hooks/useInput';
 
 import * as S from './styles';
 
 const PostForm = () => {
   const dispatch = useDispatch();
-  const [text, onChangeText, setText] = useInput('');
+  const [text, setText] = useState('');
   const { imagePaths, addPostDone } = useSelector((state) => state.post);
+
+  const onChangeText = useCallback((e) => {
+    const { value } = e.target;
+    if (value.length > 140) return; // antd TextArea maxLength is not work
+
+    setText(value);
+  }, []);
 
   useEffect(() => {
     if (addPostDone) {
@@ -66,7 +72,6 @@ const PostForm = () => {
       <Input.TextArea
         value={text}
         onChange={onChangeText}
-        maxlength={140}
         placeholder="어떤 신기한 일이 있었나요?"
       />
       <div>

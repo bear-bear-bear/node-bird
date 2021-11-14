@@ -1,18 +1,24 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
 
-import useInput from '../../hooks/useInput';
+import { ADD_COMMENT_REQUEST } from '../../reducers/post';
 
 import * as S from './styles';
-import { ADD_COMMENT_REQUEST } from '../../reducers/post';
 
 const CommentForm = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
   const { addCommentDone, addCommentLoading } = useSelector((state) => state.post);
-  const [commentText, onChangeCommentText, setCommentText] = useInput('');
+  const [commentText, setCommentText] = useState('');
+
+  const onChangeCommentText = useCallback((e) => {
+    const { value } = e.target;
+    if (value.length > 140) return; // antd TextArea maxLength is not work
+
+    setCommentText(value);
+  }, []);
 
   useEffect(() => {
     if (addCommentDone) {
@@ -38,7 +44,6 @@ const CommentForm = ({ post }) => {
           value={commentText}
           onChange={onChangeCommentText}
           rows={4}
-          maxlength={140}
         />
         <S.CustomButton type="primary" htmlType="submit" loading={addCommentLoading}>댓글달기</S.CustomButton>
       </Form.Item>

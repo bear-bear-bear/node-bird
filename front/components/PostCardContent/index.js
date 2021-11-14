@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { Button, Input } from 'antd';
 import PropTypes from 'prop-types';
-import useInput from '../../hooks/useInput';
 
 const PostCardContent = ({ postData, isEditting, requestEdit, cancleEdit }) => {
-  const [editText, onChangeEditText] = useInput(postData);
+  const [editText, setEditText] = useState(postData);
   const { updatePostLoading, updatePostDone } = useSelector((state) => state.post);
-
   const hashtagRegex = /(#[^\s#]+)/g;
+
+  const onChangeEditText = useCallback((e) => {
+    const { value } = e.target;
+    if (value.length > 140) return; // antd TextArea maxLength is not work
+
+    setEditText(value);
+  }, []);
 
   useEffect(() => {
     if (!updatePostDone) return;
@@ -21,7 +26,7 @@ const PostCardContent = ({ postData, isEditting, requestEdit, cancleEdit }) => {
       {isEditting
         ? (
           <>
-            <Input.TextArea value={editText} onChange={onChangeEditText} maxlength={140} />
+            <Input.TextArea value={editText} onChange={onChangeEditText} />
             <Button.Group style={{ float: 'right' }}>
               <Button
                 type="primary"
