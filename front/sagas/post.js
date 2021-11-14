@@ -12,7 +12,7 @@ import {
   LOAD_POST_REQUEST, LOAD_POST_SUCCESS, LOAD_POST_FAILURE,
   LOAD_USER_POSTS_REQUEST, LOAD_HASHTAG_POSTS_REQUEST, LOAD_USER_POSTS_SUCCESS,
   LOAD_USER_POSTS_FAILURE, LOAD_HASHTAG_POSTS_SUCCESS, LOAD_HASHTAG_POSTS_FAILURE,
-  CHANGE_RETWEET_COUNT,
+  CHANGE_RETWEET_COUNT, UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS, UPDATE_POST_FAILURE,
 } from '../reducers/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user';
 
@@ -160,6 +160,26 @@ function* addPost(action) {
   }
 }
 
+function updatePostAPI(data) {
+  // !! not generator
+  return axios.patch(`/post/${data.id}`, data);
+}
+
+function* updatePost(action) {
+  try {
+    const result = yield call(updatePostAPI, action.data);
+    yield put({
+      type: UPDATE_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: UPDATE_POST_FAILURE,
+      data: err.response?.data || null,
+    });
+  }
+}
+
 function uploadImagesAPI(data) {
   // !! not generator
   return axios.post('/post/images', data);
@@ -287,6 +307,10 @@ function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 }
 
+function* watchUpdatePost() {
+  yield takeLatest(UPDATE_POST_REQUEST, updatePost);
+}
+
 function* watchUploadImages() {
   yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
 }
@@ -312,6 +336,7 @@ export default function* postSaga() {
     fork(watchLoadPosts),
     fork(watchLoadPost),
     fork(watchAddPost),
+    fork(watchUpdatePost),
     fork(watchUploadImages),
     fork(watchRemovePost),
     fork(watchAddComment),

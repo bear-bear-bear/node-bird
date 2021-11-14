@@ -22,6 +22,7 @@ import {
   LIKE_POST_REQUEST,
   UNLIKE_POST_REQUEST,
   RETWEET_REQUEST,
+  UPDATE_POST_REQUEST,
 } from '../../reducers/post';
 
 import * as S from './styles';
@@ -31,6 +32,7 @@ moment.locale('ko');
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const [commentFormOpened, setCommentFormOpened] = useState(false);
+  const [isEditting, setIsEditting] = useState(false);
   const id = useSelector((state) => state.user.me?.id);
   const liked = post.Likers.find((v) => v.id === id);
   const { removePostLoading } = useSelector((state) => state.post);
@@ -50,27 +52,45 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, []);
+
   const onLike = useCallback(() => {
     dispatch({
       type: LIKE_POST_REQUEST,
       data: post.id,
     });
   }, []);
+
   const onUnlike = useCallback(() => {
     dispatch({
       type: UNLIKE_POST_REQUEST,
       data: post.id,
     });
   }, []);
+
   const onToggleComment = useCallback(() => {
     setCommentFormOpened((prev) => !prev);
   }, []);
+
   const onRemovePost = useCallback(() => {
     dispatch({
       type: REMOVE_POST_REQUEST,
       data: post.id,
     });
   }, []);
+
+  const onClickEditButton = useCallback(() => {
+    setIsEditting(true);
+  }, []);
+
+  const requestEdit = useCallback((updatedContent) => {
+    dispatch({
+      type: UPDATE_POST_REQUEST,
+      data: {
+        id: post.id,
+        content: updatedContent,
+      },
+    });
+  });
 
   return (
     <S.CardWrapper isRetweeted={!!post.RetweetFrom}>
@@ -115,6 +135,7 @@ const PostCard = ({ post }) => {
                     {!isRetweeted && (
                       <Button
                         type="primary"
+                        onClick={onClickEditButton}
                       >
                         수정
                       </Button>
@@ -164,7 +185,14 @@ const PostCard = ({ post }) => {
                   </Link>
                       )}
                 title={post.User.nickname}
-                description={<PostCardContent postData={post.content} />}
+                description={(
+                  <PostCardContent
+                    isEditting={isEditting}
+                    requestEdit={requestEdit}
+                    cancleEdit={() => setIsEditting(false)}
+                    postData={post.content}
+                  />
+                )}
               />
             </>
           )}

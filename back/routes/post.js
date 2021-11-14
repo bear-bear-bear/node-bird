@@ -146,6 +146,28 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => { // POST 
   }
 });
 
+// 게시글 수정
+router.patch('/:postId', isLoggedIn, async(req, res, next) => { // PATCH /post/:postId
+  try {
+    await Post.update({
+      content: req.body.content
+    }, {
+      where: {
+        id: req.params.postId,
+        UserId: req.user.id,
+      },
+    });
+
+    res.status(200).json({
+      PostId: parseInt(req.params.postId, 10),
+      content: req.body.content,
+    });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
 // 게시글 좋아요 on
 router.patch('/:postId/like', isLoggedIn, async(req, res, next) => { // PATCH /post/:postId/like
   try {
