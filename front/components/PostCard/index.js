@@ -42,43 +42,35 @@ const PostCard = ({ post }) => {
   const retweetImages = post.RetweetFrom?.Images[0] && post.RetweetFrom.Images;
   const images = postImages || retweetImages;
 
-  const isUser = !!id;
   const isRetweeted = post.RetweetFromId && post.RetweetFrom;
 
   const onRetweet = useCallback(() => {
-    if (!isUser) {
-      alert('로그인이 필요합니다.');
-      return;
-    }
     dispatch({
       type: RETWEET_REQUEST,
       data: post.id,
     });
-  }, [isUser]);
+  }, []);
   const onLike = useCallback(() => {
-    if (!isUser) return;
     dispatch({
       type: LIKE_POST_REQUEST,
       data: post.id,
     });
-  }, [isUser]);
+  }, []);
   const onUnlike = useCallback(() => {
-    if (!isUser) return;
     dispatch({
       type: UNLIKE_POST_REQUEST,
       data: post.id,
     });
-  }, [isUser]);
+  }, []);
   const onToggleComment = useCallback(() => {
     setCommentFormOpened((prev) => !prev);
   }, []);
   const onRemovePost = useCallback(() => {
-    if (!isUser) return;
     dispatch({
       type: REMOVE_POST_REQUEST,
       data: post.id,
     });
-  }, [isUser]);
+  }, []);
 
   return (
     <S.CardWrapper isRetweeted={!!post.RetweetFrom}>
@@ -123,7 +115,6 @@ const PostCard = ({ post }) => {
                     {!isRetweeted && (
                       <Button
                         type="primary"
-                        // onClick={onEditPost}
                       >
                         수정
                       </Button>
