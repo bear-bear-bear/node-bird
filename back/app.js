@@ -35,28 +35,33 @@ if (process.env.NODE_ENV === 'production') {
     origin: ['https://bearsns.com'],
     credentials: true,
   }));
+  app.use(session({
+    saveUninitialized: false,
+    resave: false,
+    secret: process.env.COOKIE_SECRET,
+    proxy: true,
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      domain: '.bearsns.com'
+    }
+  }));
 } else {
   app.use(morgan('dev'));
   app.use(cors({
     origin: true,
     credentials: true,
   }));
+  app.use(session({
+    saveUninitialized: false,
+    resave: false,
+    secret: process.env.COOKIE_SECRET,
+  }));
 }
 app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(session({
-  saveUninitialized: false,
-  resave: false,
-  secret: process.env.COOKIE_SECRET,
-  proxy: true,
-  cookie: {
-    httpOnly: true,
-    secure: true,
-    domain: process.env.NODE_ENV === 'production' && '.bearsns.com'
-  }
-}));
 app.use(passport.initialize());
 app.use(passport.session());
 
