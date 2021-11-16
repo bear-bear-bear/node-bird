@@ -16,8 +16,9 @@
     "express-jwt": "6.0.0",
     "forest-express-sequelize": "^8.0.0",
     "morgan": "1.9.1",
+    "mysql2": "~2.2.5",
+    "pm2": "^5.1.2",
     "require-all": "^3.0.0",
-    "sequelize": "~5.15.1",
-    "mysql2": "~2.2.5"
+    "sequelize": "~5.15.1"
   }
 }
