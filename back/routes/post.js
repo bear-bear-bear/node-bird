@@ -5,40 +5,60 @@ const fs = require('fs');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 
-
-const { Post, Image, Comment, User, Hashtag, Sequelize } = require('../models');
+const { Post, Image, Comment, User, Hashtag } = require('../models');
 const { isLoggedIn } = require('../routes/middlewares');
 
 const router = express.Router();
 
-// try {
-//   fs.accessSync('uploads');
-// } catch (err) {
-//   console.log('uploads 디렉터리가 없으므로 새로 생성합니다.');
-//   fs.mkdirSync('uploads');
-// }
-
-AWS.config.update({
-  accessKeyId: process.env.S3_ACCESS_KEY_ID,
-  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-  region: 'ap-northeast-2',
-
-})
-const upload = multer({
-  storage: multerS3({
-    s3: new AWS.S3(),
-    bucket: 'bearsns',
-    key(req, file, cb) {
-      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`)
-    }
-  }),
-  limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
-});
-
 // 이미지 업로드
-router.post('/images', upload.array('image'), (req, res, next) => { // POST /post/images
-  res.json(req.files.map((v) => v.location.replace(/\/original\//, '/thumb/')));
-});
+if (process.env.NODE_ENV === 'production') {
+  AWS.config.update({
+    accessKeyId: process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    region: 'ap-northeast-2',
+  });
+
+  const upload = multer({
+    storage: multerS3({
+      s3: new AWS.S3(),
+      bucket: 'bearsns',
+      key(req, file, cb) {
+        cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`)
+      }
+    }),
+    limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
+  });
+
+  router.post('/images', upload.array('image'), (req, res, next) => { // POST /post/images
+    res.json(req.files.map((v) => v.location.replace(/\/original\//, '/thumb/')));
+  });
+} else {
+  try {
+    fs.accessSync('uploads');
+  } catch (error) {
+    console.log('uploads 폴더가 없으므로 생성합니다.');
+    fs.mkdirSync('uploads');
+  }
+
+  const upload = multer({
+    storage: multer.diskStorage({
+      destination(req, file, done) {
+        done(null, 'uploads');
+      },
+      filename(req, file, done) {
+        const ext = path.extname(file.originalname);
+        const basename = path.basename(file.originalname, ext);
+        done(null, basename + '_' + new Date().getTime() + ext);
+      },
+    }),
+    limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
+  });
+
+  router.post('/images', isLoggedIn, upload.array('image'), (req, res, next) => { // POST /post/images
+    console.log(req.files);
+    res.json(req.files.map((v) => v.filename));
+  });
+}
 
 // 게시글 하나 가져오기
 router.get('/:postId', async (req, res, next) => { // GET /post/:postId
